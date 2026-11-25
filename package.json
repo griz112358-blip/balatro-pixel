@@ -1,0 +1,30 @@
+{
+  "name": "balatro-pixel",
+  "version": "1.0.0",
+  "description": "A pixel-art tribute to Balatro: poker hands, jokers, blinds and shops.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "dev": "node tools/serve.mjs",
+    "test": "node test/engine.test.mjs && node test/pixel.test.mjs && node test/i18n.test.mjs && node test/ui.test.mjs && node tools/simulate.mjs --runs 40",
+    "test:unit": "node test/engine.test.mjs && node test/pixel.test.mjs && node test/i18n.test.mjs && node test/ui.test.mjs",
+    "test:sim": "node tools/simulate.mjs --runs 40",
+    "test:smoke": "node tools/smoke.mjs",
+    "shots": "node tools/screenshots.mjs",
+    "test:i18n": "node test/i18n.test.mjs",
+    "test:pixel": "node test/pixel.test.mjs",
+    "test:ui": "node test/ui.test.mjs"
+  },
+  "keywords": [
+    "balatro",
+    "poker",
+    "roguelike",
+    "pixel-art",
+    "game"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.65.1"
+  }
+}

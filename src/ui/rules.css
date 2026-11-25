@@ -1,0 +1,278 @@
+/* The rules page. Same palette as the game, but it is a document, not a
+   canvas: a sticky header, a section index on the left and the entries on
+   the right. */
+
+:root {
+  --bg: #12101c;
+  --bg2: #1c1930;
+  --panel: #2a2440;
+  --panel-light: #3a3158;
+  --outline: #0c0a14;
+  --white: #f4f1e8;
+  --cream: #e8dfc8;
+  --grey: #8b8399;
+  --blue: #4a7bd6;
+  --light-blue: #7fa8ff;
+  --red: #e05a4a;
+  --green: #4fbf6a;
+  --yellow: #f5c542;
+  --orange: #f08a3c;
+  --purple: #a25fd6;
+  --pink: #f07ab0;
+  --cyan: #4ac8d6;
+  --font: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans CJK SC", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+a { color: var(--light-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- header ---------- */
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--bg2);
+  border-bottom: 2px solid var(--outline);
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 3px;
+  color: var(--yellow);
+}
+
+.brand p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--grey);
+}
+
+.tools {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#search {
+  width: 260px;
+  padding: 7px 10px;
+  border: 2px solid var(--outline);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 13px;
+}
+
+#search:focus { outline: none; border-color: var(--blue); }
+
+#lang, #back {
+  padding: 7px 12px;
+  border: 2px solid var(--outline);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#back { display: inline-block; }
+#lang:hover, #back:hover { background: var(--panel-light); }
+
+/* ---------- layout ---------- */
+
+body { display: block; }
+
+nav {
+  position: sticky;
+  top: 62px;
+  z-index: 9;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  background: rgba(28, 25, 48, 0.96);
+  border-bottom: 1px solid var(--outline);
+}
+
+nav a {
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--cream);
+  font-size: 12px;
+}
+
+nav a:hover { background: var(--panel-light); text-decoration: none; }
+nav a.active { background: var(--blue); color: var(--white); }
+
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+
+section { margin-bottom: 34px; scroll-margin-top: 120px; }
+
+section > h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  color: var(--yellow);
+}
+
+section > .count {
+  margin: 0 0 12px;
+  font-size: 12px;
+  color: var(--grey);
+}
+
+h3 {
+  margin: 20px 0 8px;
+  font-size: 14px;
+  color: var(--cyan);
+  letter-spacing: 1px;
+}
+
+/* ---------- entries ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 10px;
+}
+
+.entry {
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 2px solid var(--outline);
+  border-radius: 5px;
+}
+
+.entry .head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.entry .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.entry .effect {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: var(--cream);
+}
+
+.entry .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 7px;
+}
+
+.chip {
+  padding: 1px 7px;
+  border-radius: 9px;
+  background: var(--panel-light);
+  color: var(--grey);
+  font-size: 11px;
+}
+
+.chip.rarity-Common { background: #35405e; color: #cfe0ff; }
+.chip.rarity-Uncommon { background: #3d5a3a; color: #c9f0bd; }
+.chip.rarity-Rare { background: #5b3a68; color: #eccdfb; }
+.chip.rarity-Legendary { background: #6b4a1c; color: #ffe3a3; }
+.chip.price { background: #4a3a1c; color: var(--yellow); }
+
+/* ---------- overview ---------- */
+
+.overview p {
+  margin: 0 0 10px;
+  padding: 12px 14px;
+  background: var(--panel);
+  border-left: 3px solid var(--blue);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.overview p.formula {
+  border-left-color: var(--yellow);
+  color: var(--yellow);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* The four suits, drawn with the same outlines the cards use. */
+.suits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 20px;
+}
+
+.suit-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.suit-swatch {
+  display: inline-flex;
+  align-items: center;
+}
+
+.suit-swatch svg {
+  display: block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+th, td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--outline);
+  text-align: left;
+}
+
+th { color: var(--grey); font-weight: 600; font-size: 12px; }
+td.num { color: var(--yellow); }
+
+#empty {
+  margin: 40px auto;
+  max-width: 1180px;
+  padding: 0 20px;
+  color: var(--grey);
+  text-align: center;
+}
+
+.hidden { display: none !important; }

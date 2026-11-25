@@ -1,0 +1,3097 @@
+{
+ "jokers": [
+  {
+   "name": "8 Ball",
+   "effect": "1 in 4 chance for each played 8 to create a card when scored",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Effect",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 26,
+   "wiki": "8 Ball"
+  },
+  {
+   "name": "Abstract Joker",
+   "effect": "+3 mult for each Joker card",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 34,
+   "wiki": "Abstract Joker"
+  },
+  {
+   "name": "Acrobat",
+   "effect": "X3 on final hand of round",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Play 200 hands",
+   "number": 108,
+   "wiki": "Acrobat"
+  },
+  {
+   "name": "Ancient Joker",
+   "effect": "Each played card with [suit] gives X1.5 when scored, suit changes at end of round",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 99,
+   "wiki": "Ancient Joker"
+  },
+  {
+   "name": "Arrowhead",
+   "effect": "Played cards with suit give +50 chips when scored",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Chips",
+   "activation": "On Scored",
+   "unlock": "Have at least 30 cards with Spade suit in your deck",
+   "number": 118,
+   "wiki": "Arrowhead"
+  },
+  {
+   "name": "Astronomer",
+   "effect": "All Planet cards and Celestial Packs in the shop are free",
+   "rarity": "Uncommon",
+   "price": 8,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "Discover every card",
+   "number": 143,
+   "wiki": "Astronomer"
+  },
+  {
+   "name": "Banner",
+   "effect": "+30 chips for each remaining discard",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 22,
+   "wiki": "Banner"
+  },
+  {
+   "name": "Baron",
+   "effect": "Each King held in hand gives X1.5",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "On Held",
+   "unlock": "",
+   "number": 72,
+   "wiki": "Baron"
+  },
+  {
+   "name": "Baseball Card",
+   "effect": "Uncommon Jokers each give X1.5",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "On Other Jokers",
+   "unlock": "",
+   "number": 92,
+   "wiki": "Baseball Card"
+  },
+  {
+   "name": "Blackboard",
+   "effect": "X3 if all cards held in hand are or",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 48,
+   "wiki": "Blackboard"
+  },
+  {
+   "name": "Bloodstone",
+   "effect": "1 in 2 chance for played cards with suit to give X1.5 when scored",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Multiplicative Mult",
+   "activation": "On Scored",
+   "unlock": "Have at least 30 cards with Heart suit in your deck",
+   "number": 117,
+   "wiki": "Bloodstone"
+  },
+  {
+   "name": "Blue Joker",
+   "effect": "+2 chips for each remaining card in deck +104 chips",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 53,
+   "wiki": "Blue Joker"
+  },
+  {
+   "name": "Blueprint",
+   "effect": "Copies ability of Joker to the right",
+   "rarity": "Rare",
+   "price": 10,
+   "type": "Effect",
+   "activation": "",
+   "unlock": "Win a run",
+   "number": 123,
+   "wiki": "Blueprint"
+  },
+  {
+   "name": "Bootstraps",
+   "effect": "+2 mult for every $5 you have",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "Have at least 2 Polychrome Jokers at the same time.",
+   "number": 145,
+   "wiki": "Bootstraps"
+  },
+  {
+   "name": "Brainstorm",
+   "effect": "Copies the ability of leftmost Joker",
+   "rarity": "Rare",
+   "price": 10,
+   "type": "Effect",
+   "activation": "",
+   "unlock": "Discard a .",
+   "number": 138,
+   "wiki": "Brainstorm"
+  },
+  {
+   "name": "Bull",
+   "effect": "+2 chips for each you have +0 chips",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 93,
+   "wiki": "Bull"
+  },
+  {
+   "name": "Burglar",
+   "effect": "When Blind is selected, gain +3 Hands and lose all discards",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Effect",
+   "activation": "On Blind Select",
+   "unlock": "",
+   "number": 47,
+   "wiki": "Burglar"
+  },
+  {
+   "name": "Burnt Joker",
+   "effect": "Upgrade the level of the first discarded poker hand each round",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Effect",
+   "activation": "On Discard",
+   "unlock": "Sell 50 cards.",
+   "number": 144,
+   "wiki": "Burnt Joker"
+  },
+  {
+   "name": "Business Card",
+   "effect": "Played face cards have a 1 in 2 chance to give $2 when scored",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Economy",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 42,
+   "wiki": "Business Card"
+  },
+  {
+   "name": "Campfire",
+   "effect": "This Joker gains X0.25 for each card sold, resets when Boss Blind is defeated X1",
+   "rarity": "Rare",
+   "price": 9,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 105,
+   "wiki": "Campfire"
+  },
+  {
+   "name": "Canio",
+   "effect": "This Joker gains X1 when a face card is destroyed X1",
+   "rarity": "Legendary",
+   "price": 20,
+   "type": "Multiplicative Mult",
+   "activation": "Mixed",
+   "unlock": "Find this Joker from the Soul card.",
+   "number": 146,
+   "wiki": "Canio"
+  },
+  {
+   "name": "Card Sharp",
+   "effect": "X3 if played poker hand has already been played this round",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 62,
+   "wiki": "Card Sharp"
+  },
+  {
+   "name": "Cartomancer",
+   "effect": "Create a card when Blind is selected",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Effect",
+   "activation": "On Blind Select",
+   "unlock": "Discover every Tarot card.",
+   "number": 142,
+   "wiki": "Cartomancer"
+  },
+  {
+   "name": "Castle",
+   "effect": "This Joker gains +3 chips per discarded [suit] card, suit changes every round +0 chips",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Chips",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 103,
+   "wiki": "Castle"
+  },
+  {
+   "name": "Cavendish",
+   "effect": "X3 1 in 1000 chance this card is destroyed at the end of round",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 61,
+   "wiki": "Cavendish"
+  },
+  {
+   "name": "Ceremonial Dagger",
+   "effect": "When Blind is selected, destroy Joker to the right and permanently add double its sell value to this Mult +0 mult",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 21,
+   "wiki": "Ceremonial Dagger"
+  },
+  {
+   "name": "Certificate",
+   "effect": "When round begins, add a random playing card with a random seal to your hand",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "Have a Gold playing card with a Gold Seal",
+   "number": 112,
+   "wiki": "Certificate"
+  },
+  {
+   "name": "Chaos the Clown",
+   "effect": "1 free Reroll per shop",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 30,
+   "wiki": "Chaos the Clown"
+  },
+  {
+   "name": "Chaos Theory",
+   "effect": "Unknown",
+   "rarity": "Unknown",
+   "price": 0,
+   "type": "Unknown",
+   "activation": "Unknown",
+   "unlock": "Unknown",
+   "number": 0,
+   "wiki": "Chaos Theory"
+  },
+  {
+   "name": "Chicot",
+   "effect": "Disables effect of every Boss Blind",
+   "rarity": "Legendary",
+   "price": 20,
+   "type": "Effect",
+   "activation": "On Blind Select",
+   "unlock": "Find this Joker from the Soul card.",
+   "number": 149,
+   "wiki": "Chicot"
+  },
+  {
+   "name": "Clever Joker",
+   "effect": "+80 chips if played hand contains a",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 13,
+   "wiki": "Clever Joker"
+  },
+  {
+   "name": "Cloud 9",
+   "effect": "Earn $1 for each 9 in your full deck at end of round",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Economy",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 73,
+   "wiki": "Cloud 9"
+  },
+  {
+   "name": "Constellation",
+   "effect": "This Joker gains X0.1 every time a Planet card is used X1",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 55,
+   "wiki": "Constellation"
+  },
+  {
+   "name": "Crafty Joker",
+   "effect": "+80 chips if played hand contains a",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 15,
+   "wiki": "Crafty Joker"
+  },
+  {
+   "name": "Crazy Joker",
+   "effect": "+12 mult if played hand contains a",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 9,
+   "wiki": "Crazy Joker"
+  },
+  {
+   "name": "Credit Card",
+   "effect": "Go up to -$20 in debt",
+   "rarity": "Common",
+   "price": 1,
+   "type": "Economy",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 20,
+   "wiki": "Credit Card"
+  },
+  {
+   "name": "Delayed Gratification",
+   "effect": "Earn $2 per discard if no discards are used by end of the round",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Economy",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 35,
+   "wiki": "Delayed Gratification"
+  },
+  {
+   "name": "Devious Joker",
+   "effect": "+100 chips if played hand contains a",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 14,
+   "wiki": "Devious Joker"
+  },
+  {
+   "name": "Diet Cola",
+   "effect": "Sell this card to create a free Double Tag",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 94,
+   "wiki": "Diet Cola"
+  },
+  {
+   "name": "DNA",
+   "effect": "If first hand of round has only 1 card, add a permanent copy to deck and draw it to hand",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Effect",
+   "activation": "On Played",
+   "unlock": "",
+   "number": 51,
+   "wiki": "DNA"
+  },
+  {
+   "name": "Driver's License",
+   "effect": "X3 if you have at least 16 Enhanced cards in your full deck",
+   "rarity": "Rare",
+   "price": 7,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Enhance 16 cards in your deck",
+   "number": 141,
+   "wiki": "Driver's License"
+  },
+  {
+   "name": "Droll Joker",
+   "effect": "+10 mult if played hand contains a",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 10,
+   "wiki": "Droll Joker"
+  },
+  {
+   "name": "Drunkard",
+   "effect": "+1 discard each round",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 88,
+   "wiki": "Drunkard"
+  },
+  {
+   "name": "Dusk",
+   "effect": "Retrigger all played cards in final hand of the round",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Retrigger",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 28,
+   "wiki": "Dusk"
+  },
+  {
+   "name": "Egg",
+   "effect": "Gains $3 of sell value at end of round",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Economy",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 46,
+   "wiki": "Egg"
+  },
+  {
+   "name": "Erosion",
+   "effect": "+4 mult for each card below [the deck's starting size] in your full deck",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 81,
+   "wiki": "Erosion"
+  },
+  {
+   "name": "Even Steven",
+   "effect": "Played cards with even rank give +4 mult when scored (10, 8, 6, 4, 2)",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 39,
+   "wiki": "Even Steven"
+  },
+  {
+   "name": "Faceless Joker",
+   "effect": "Earn $5 if 3 or more face cards are discarded at the same time",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Economy",
+   "activation": "On Discard",
+   "unlock": "",
+   "number": 57,
+   "wiki": "Faceless Joker"
+  },
+  {
+   "name": "Fibonacci",
+   "effect": "Each played Ace, 2, 3, 5, or 8 gives +8 mult when scored",
+   "rarity": "Uncommon",
+   "price": 8,
+   "type": "Additive Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 31,
+   "wiki": "Fibonacci"
+  },
+  {
+   "name": "Flash Card",
+   "effect": "This Joker gains +2 mult per reroll in the shop",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 96,
+   "wiki": "Flash Card"
+  },
+  {
+   "name": "Flower Pot",
+   "effect": "X3 if poker hand contains a card, card, card, and card",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Reach Ante level 8",
+   "number": 122,
+   "wiki": "Flower Pot"
+  },
+  {
+   "name": "Fortune Teller",
+   "effect": "+1 mult per Tarot card used this run +0",
+   "rarity": "Common",
+   "price": 6,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 86,
+   "wiki": "Fortune Teller"
+  },
+  {
+   "name": "Four Fingers",
+   "effect": "All and can be made with 4 cards",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 18,
+   "wiki": "Four Fingers"
+  },
+  {
+   "name": "Gift Card",
+   "effect": "Add $1 of sell value to every Joker and Consumable card at end of round",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Economy",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 79,
+   "wiki": "Gift Card"
+  },
+  {
+   "name": "Glass Joker",
+   "effect": "This Joker gains X0.75 for every Glass Card that is destroyed X1",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Have at least 5 Glass Cards in your deck",
+   "number": 120,
+   "wiki": "Glass Joker"
+  },
+  {
+   "name": "Gluttonous Joker",
+   "effect": "Played cards with suit give +3 mult when scored",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 5,
+   "wiki": "Gluttonous Joker"
+  },
+  {
+   "name": "Golden Joker",
+   "effect": "Earn $4 at end of round",
+   "rarity": "Common",
+   "price": 6,
+   "type": "Economy",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 90,
+   "wiki": "Golden Joker"
+  },
+  {
+   "name": "Golden Ticket",
+   "effect": "Played Gold cards earn $4 when scored",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Economy",
+   "activation": "On Scored",
+   "unlock": "Play a 5 card hand that contains only Gold cards",
+   "number": 106,
+   "wiki": "Golden Ticket"
+  },
+  {
+   "name": "Greedy Joker",
+   "effect": "Played cards with suit give +3 mult when scored",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 2,
+   "wiki": "Greedy Joker"
+  },
+  {
+   "name": "Green Joker",
+   "effect": "+1 mult per hand played -1 mult per discard",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 58,
+   "wiki": "Green Joker"
+  },
+  {
+   "name": "Gros Michel",
+   "effect": "+15 mult 1 in 6 chance this card is destroyed at end of round",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 38,
+   "wiki": "Gros Michel"
+  },
+  {
+   "name": "Hack",
+   "effect": "Retrigger each played 2, 3, 4, or 5",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Retrigger",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 36,
+   "wiki": "Hack"
+  },
+  {
+   "name": "Half Joker",
+   "effect": "+20 mult if played hand contains 3 or fewer cards",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 16,
+   "wiki": "Half Joker"
+  },
+  {
+   "name": "Hallucination",
+   "effect": "1 in 2 chance to create a card when any Booster Pack is opened",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 85,
+   "wiki": "Hallucination"
+  },
+  {
+   "name": "Hanging Chad",
+   "effect": "Retrigger first played card used in scoring 2 additional times",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Retrigger",
+   "activation": "On Scored",
+   "unlock": "Beat a Boss Blind with a",
+   "number": 115,
+   "wiki": "Hanging Chad"
+  },
+  {
+   "name": "Hiker",
+   "effect": "Every played card permanently gains +5 chips when scored",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Chips",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 56,
+   "wiki": "Hiker"
+  },
+  {
+   "name": "Hit the Road",
+   "effect": "This Joker gains X0.5 for every Jack discarded this round",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "Mixed",
+   "unlock": "Discard 5 Jacks at the same time.",
+   "number": 130,
+   "wiki": "Hit the Road"
+  },
+  {
+   "name": "Hologram",
+   "effect": "This Joker gains X0.25 every time a playing card is added to your deck",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 70,
+   "wiki": "Hologram"
+  },
+  {
+   "name": "Ice Cream",
+   "effect": "+100 chips -5 chips for every hand played",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 50,
+   "wiki": "Ice Cream"
+  },
+  {
+   "name": "Invisible Joker",
+   "effect": "After 2 rounds, sell this card to Duplicate a random Joker 0/2 (Removes Negative Negative from copy)",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "Win a run without ever having more than 4 Jokers",
+   "number": 137,
+   "wiki": "Invisible Joker"
+  },
+  {
+   "name": "Joker",
+   "effect": "+4 mult",
+   "rarity": "Common",
+   "price": 2,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 1,
+   "wiki": "Joker"
+  },
+  {
+   "name": "Joker Stencil",
+   "effect": "X1 for each empty Joker slot Joker Stencil included",
+   "rarity": "Uncommon",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 17,
+   "wiki": "Joker Stencil"
+  },
+  {
+   "name": "Jolly Joker",
+   "effect": "+8 mult if played hand contains a",
+   "rarity": "Common",
+   "price": 3,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 6,
+   "wiki": "Jolly Joker"
+  },
+  {
+   "name": "Juggler",
+   "effect": "+1 hand size",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 87,
+   "wiki": "Juggler"
+  },
+  {
+   "name": "Loyalty Card",
+   "effect": "X4 every 6 hands played 5 remaining",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 25,
+   "wiki": "Loyalty Card"
+  },
+  {
+   "name": "Luchador",
+   "effect": "Sell this card to disable the current Boss Blind",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 77,
+   "wiki": "Luchador"
+  },
+  {
+   "name": "Lucky Cat",
+   "effect": "This Joker gains X0.25 every time a Lucky card successfully triggers",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 91,
+   "wiki": "Lucky Cat"
+  },
+  {
+   "name": "Lusty Joker",
+   "effect": "Played cards with suit give +3 mult when scored",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 3,
+   "wiki": "Lusty Joker"
+  },
+  {
+   "name": "Mad Joker",
+   "effect": "+10 mult if played hand contains a",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 8,
+   "wiki": "Mad Joker"
+  },
+  {
+   "name": "Madness",
+   "effect": "When Small Blind or Big Blind is selected, gain X0.5 and destroy a random Joker",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 64,
+   "wiki": "Madness"
+  },
+  {
+   "name": "Mail-In Rebate",
+   "effect": "Earn $5 for each discarded [rank], rank changes every round",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Economy",
+   "activation": "On Discard",
+   "unlock": "",
+   "number": 83,
+   "wiki": "Mail-In Rebate"
+  },
+  {
+   "name": "Marble Joker",
+   "effect": "Adds one Stone card to the deck when Blind is selected",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Effect",
+   "activation": "On Blind Select",
+   "unlock": "",
+   "number": 24,
+   "wiki": "Marble Joker"
+  },
+  {
+   "name": "Matador",
+   "effect": "Earn $8 if played hand triggers the Boss Blind ability",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Economy",
+   "activation": "Independent",
+   "unlock": "Defeat a Boss Blind in 1 hand without using any discards",
+   "number": 129,
+   "wiki": "Matador"
+  },
+  {
+   "name": "Merry Andy",
+   "effect": "+3 discards each round, -1 hand size",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "Win a run in 12 or fewer rounds",
+   "number": 125,
+   "wiki": "Merry Andy"
+  },
+  {
+   "name": "Midas Mask",
+   "effect": "All played face cards become Gold cards when scored",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Effect",
+   "activation": "On Played",
+   "unlock": "",
+   "number": 76,
+   "wiki": "Midas Mask"
+  },
+  {
+   "name": "Mime",
+   "effect": "Retrigger all card held in hand abilities",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Retrigger",
+   "activation": "On Held",
+   "unlock": "",
+   "number": 19,
+   "wiki": "Mime"
+  },
+  {
+   "name": "Misprint",
+   "effect": "+0-23 mult",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 27,
+   "wiki": "Misprint"
+  },
+  {
+   "name": "Mr. Bones",
+   "effect": "Prevents Death if chips scored are at least 25% of required chips self destructs",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "Lose 5 runs",
+   "number": 107,
+   "wiki": "Mr. Bones"
+  },
+  {
+   "name": "Mystic Summit",
+   "effect": "+15 mult when 0 discards remaining",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 23,
+   "wiki": "Mystic Summit"
+  },
+  {
+   "name": "Obelisk",
+   "effect": "This Joker gains X0.2 per consecutive hand played without playing your most played poker hand X1",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 75,
+   "wiki": "Obelisk"
+  },
+  {
+   "name": "Odd Todd",
+   "effect": "Played cards with odd rank give +31 chips when scored (A, 9, 7, 5, 3)",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Chips",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 40,
+   "wiki": "Odd Todd"
+  },
+  {
+   "name": "Onyx Agate",
+   "effect": "Played cards with suit give +7 mult when scored",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Additive Mult",
+   "activation": "On Scored",
+   "unlock": "Have at least 30 cards with Club suit in your deck",
+   "number": 119,
+   "wiki": "Onyx Agate"
+  },
+  {
+   "name": "Oops! All 6s",
+   "effect": "Doubles all listed probabilities (ex: 1 in 3 -> 2 in 3)",
+   "rarity": "Uncommon",
+   "price": 4,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "In one hand, earn at least 10,000 chips",
+   "number": 126,
+   "wiki": "Oops! All 6s"
+  },
+  {
+   "name": "Pareidolia",
+   "effect": "All cards are considered face cards",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 37,
+   "wiki": "Pareidolia"
+  },
+  {
+   "name": "Perkeo",
+   "effect": "Creates a Negative copy of 1 random consumable card in your possession at the end of the shop",
+   "rarity": "Legendary",
+   "price": 20,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "Find this Joker from the Soul card.",
+   "number": 150,
+   "wiki": "Perkeo"
+  },
+  {
+   "name": "Photograph",
+   "effect": "First played face card gives X2 when scored",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Multiplicative Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 78,
+   "wiki": "Photograph"
+  },
+  {
+   "name": "Popcorn",
+   "effect": "+20 mult -4 mult per round played",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 97,
+   "wiki": "Popcorn"
+  },
+  {
+   "name": "Raised Fist",
+   "effect": "Adds double the rank of lowest ranked card held in hand to Mult",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "On Held",
+   "unlock": "",
+   "number": 29,
+   "wiki": "Raised Fist"
+  },
+  {
+   "name": "Ramen",
+   "effect": "X2, loses X0.01 per card discarded",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 100,
+   "wiki": "Ramen"
+  },
+  {
+   "name": "Red Card",
+   "effect": "This Joker gains +3 mult when any Booster Pack is skipped",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 63,
+   "wiki": "Red Card"
+  },
+  {
+   "name": "Reserved Parking",
+   "effect": "Each face card held in hand has a 1 in 2 chance to give $1",
+   "rarity": "Common",
+   "price": 6,
+   "type": "Economy",
+   "activation": "On Held",
+   "unlock": "",
+   "number": 82,
+   "wiki": "Reserved Parking"
+  },
+  {
+   "name": "Ride the Bus",
+   "effect": "This Joker gains +1 mult per consecutive hand played without a scoring face card",
+   "rarity": "Common",
+   "price": 6,
+   "type": "Additive Mult",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 44,
+   "wiki": "Ride the Bus"
+  },
+  {
+   "name": "Riff-Raff",
+   "effect": "When Blind is selected, create 2 Common Jokers",
+   "rarity": "Common",
+   "price": 6,
+   "type": "Effect",
+   "activation": "On Blind Select",
+   "unlock": "",
+   "number": 67,
+   "wiki": "Riff-Raff"
+  },
+  {
+   "name": "Rocket",
+   "effect": "Earn $1 at end of round. Payout increases by $2 when Boss Blind is defeated",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Economy",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 74,
+   "wiki": "Rocket"
+  },
+  {
+   "name": "Rough Gem",
+   "effect": "Played cards with suit earn $1 when scored",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Economy",
+   "activation": "On Scored",
+   "unlock": "Have at least 30 cards with Diamond suit in your deck",
+   "number": 116,
+   "wiki": "Rough Gem"
+  },
+  {
+   "name": "Runner",
+   "effect": "Gains +15 chips if played hand contains a",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Chips",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 49,
+   "wiki": "Runner"
+  },
+  {
+   "name": "Satellite",
+   "effect": "Earn $1 at end of round per unique Planet card used this run",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Economy",
+   "activation": "N/A (Passive)",
+   "unlock": "Have at least $400.",
+   "number": 139,
+   "wiki": "Satellite"
+  },
+  {
+   "name": "Scary Face",
+   "effect": "Played face cards give +30 chips when scored",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Chips",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 33,
+   "wiki": "Scary Face"
+  },
+  {
+   "name": "Scholar",
+   "effect": "Played Aces give +20 chips and +4 mult when scored",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Chips and Additive Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 41,
+   "wiki": "Scholar"
+  },
+  {
+   "name": "Seeing Double",
+   "effect": "X2 if played hand has a scoring card and a scoring card of any other suit",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Play a hand that contains four 7 of Clubs",
+   "number": 128,
+   "wiki": "Seeing Double"
+  },
+  {
+   "name": "Seltzer",
+   "effect": "Retrigger all cards played for the next 10 hands",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Retrigger",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 102,
+   "wiki": "Seltzer"
+  },
+  {
+   "name": "Shoot the Moon",
+   "effect": "Each Queen held in hand gives +13 mult",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "On Held",
+   "unlock": "Play every Heart card in your deck in one round.",
+   "number": 140,
+   "wiki": "Shoot the Moon"
+  },
+  {
+   "name": "Shortcut",
+   "effect": "Allows to be made with gaps of 1 rank (ex: 10 8 6 5 3)",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 69,
+   "wiki": "Shortcut"
+  },
+  {
+   "name": "Showman",
+   "effect": "Joker, , , and cards may appear multiple times",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "Reach Ante level 4",
+   "number": 121,
+   "wiki": "Showman"
+  },
+  {
+   "name": "Sixth Sense",
+   "effect": "If first hand of round is a single 6, destroy it and create a card",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 54,
+   "wiki": "Sixth Sense"
+  },
+  {
+   "name": "Sly Joker",
+   "effect": "+50 chips if played hand contains a",
+   "rarity": "Common",
+   "price": 3,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 11,
+   "wiki": "Sly Joker"
+  },
+  {
+   "name": "Smeared Joker",
+   "effect": "and count as the same suit, and count as the same suit",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "Have at least 3 {{hl|orange|}} in your deck",
+   "number": 113,
+   "wiki": "Smeared Joker"
+  },
+  {
+   "name": "Smiley Face",
+   "effect": "Played face cards give +5 mult when scored",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 104,
+   "wiki": "Smiley Face"
+  },
+  {
+   "name": "Sock and Buskin",
+   "effect": "Retrigger all played face cards",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Retrigger",
+   "activation": "On Scored",
+   "unlock": "Play a total of 300 face cards",
+   "number": 109,
+   "wiki": "Sock and Buskin"
+  },
+  {
+   "name": "Space Joker",
+   "effect": "1 in 4 chance to upgrade level of played poker hand",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Effect",
+   "activation": "On Played",
+   "unlock": "",
+   "number": 45,
+   "wiki": "Space Joker"
+  },
+  {
+   "name": "Spare Trousers",
+   "effect": "This Joker gains +2 mult if played hand contains a Two Pair +0 mult",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Additive Mult",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 98,
+   "wiki": "Spare Trousers"
+  },
+  {
+   "name": "Splash",
+   "effect": "Every played card counts in scoring",
+   "rarity": "Common",
+   "price": 3,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 52,
+   "wiki": "Splash"
+  },
+  {
+   "name": "Square Joker",
+   "effect": "This Joker gains +4 chips if played hand has exactly 4 cards",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Chips",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 65,
+   "wiki": "Square Joker"
+  },
+  {
+   "name": "Steel Joker",
+   "effect": "Gives X0.2 for each Steel Card in your full deck X1",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 32,
+   "wiki": "Steel Joker"
+  },
+  {
+   "name": "Stone Joker",
+   "effect": "Gives +25 chips for each Stone Card in your full deck",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 89,
+   "wiki": "Stone Joker"
+  },
+  {
+   "name": "Stuntman",
+   "effect": "+250 chips, -2 hand size",
+   "rarity": "Rare",
+   "price": 7,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "Earn at least 100 million (100,000,000) Chips in a single hand.",
+   "number": 136,
+   "wiki": "Stuntman"
+  },
+  {
+   "name": "Supernova",
+   "effect": "Adds the number of times poker hand has been played this run to Mult",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 43,
+   "wiki": "Supernova"
+  },
+  {
+   "name": "Superposition",
+   "effect": "Create a card if poker hand contains an Ace and a",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Effect",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 59,
+   "wiki": "Superposition"
+  },
+  {
+   "name": "Swashbuckler",
+   "effect": "Adds the sell value of all other owned Jokers to Mult +1 mult",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "Sell a total of 20 Joker cards",
+   "number": 110,
+   "wiki": "Swashbuckler"
+  },
+  {
+   "name": "Séance",
+   "effect": "If poker hand is a , create a random card",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Effect",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 66,
+   "wiki": "Séance"
+  },
+  {
+   "name": "The Duo",
+   "effect": "X2 if played hand contains a",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Win a run without playing a .",
+   "number": 131,
+   "wiki": "The Duo"
+  },
+  {
+   "name": "The Family",
+   "effect": "X4 if played hand contains a",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Win a run without playing a .",
+   "number": 133,
+   "wiki": "The Family"
+  },
+  {
+   "name": "The Idol",
+   "effect": "Each played [rank] of [suit] gives X2 when scored Card changes every round",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "On Scored",
+   "unlock": "In one hand, earn at least 1,000,000 chips",
+   "number": 127,
+   "wiki": "The Idol"
+  },
+  {
+   "name": "The Order",
+   "effect": "X3 if played hand contains a",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Win a run without playing a .",
+   "number": 134,
+   "wiki": "The Order"
+  },
+  {
+   "name": "The Tribe",
+   "effect": "X2 if played hand contains a",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Win a run without playing a .",
+   "number": 135,
+   "wiki": "The Tribe"
+  },
+  {
+   "name": "The Trio",
+   "effect": "X3 if played hand contains a",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Win a run without playing a .",
+   "number": 132,
+   "wiki": "The Trio"
+  },
+  {
+   "name": "Throwback",
+   "effect": "X0.25 for each Blind skipped this run X1",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Multiplicative Mult",
+   "activation": "Independent",
+   "unlock": "Continue a saved run from the main menu",
+   "number": 114,
+   "wiki": "Throwback"
+  },
+  {
+   "name": "To Do List",
+   "effect": "Earn $4 if poker hand is a [Poker Hand], poker hand changes at end of round",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Economy",
+   "activation": "On Played",
+   "unlock": "",
+   "number": 60,
+   "wiki": "To Do List"
+  },
+  {
+   "name": "To the Moon",
+   "effect": "Earn an extra $1 of interest for every $5 you have at end of round",
+   "rarity": "Uncommon",
+   "price": 5,
+   "type": "Economy",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 84,
+   "wiki": "To the Moon"
+  },
+  {
+   "name": "Trading Card",
+   "effect": "If first discard of round has only 1 card, destroy it and earn $3",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Economy",
+   "activation": "On Discard",
+   "unlock": "",
+   "number": 95,
+   "wiki": "Trading Card"
+  },
+  {
+   "name": "Triboulet",
+   "effect": "Played Kings and Queens each give X2 when scored",
+   "rarity": "Legendary",
+   "price": 20,
+   "type": "Multiplicative Mult",
+   "activation": "On Scored",
+   "unlock": "Find this Joker from the Soul card.",
+   "number": 147,
+   "wiki": "Triboulet"
+  },
+  {
+   "name": "Troubadour",
+   "effect": "+2 hand size, -1 hand each round",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "Win 5 consecutive rounds by playing only 1 hand",
+   "number": 111,
+   "wiki": "Troubadour"
+  },
+  {
+   "name": "Turtle Bean",
+   "effect": "+5 hand size, reduces by 1 each round",
+   "rarity": "Uncommon",
+   "price": 6,
+   "type": "Effect",
+   "activation": "N/A (Passive)",
+   "unlock": "",
+   "number": 80,
+   "wiki": "Turtle Bean"
+  },
+  {
+   "name": "Vagabond",
+   "effect": "Create a card if hand is played with or less",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Effect",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 71,
+   "wiki": "Vagabond"
+  },
+  {
+   "name": "Vampire",
+   "effect": "This Joker gains X0.1 per scoring Enhanced card played, removes card Enhancement",
+   "rarity": "Uncommon",
+   "price": 7,
+   "type": "Multiplicative Mult",
+   "activation": "Mixed",
+   "unlock": "",
+   "number": 68,
+   "wiki": "Vampire"
+  },
+  {
+   "name": "Walkie Talkie",
+   "effect": "Each played 10 or 4 gives +10 chips and +4 mult when scored",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Chips and Additive Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 101,
+   "wiki": "Walkie Talkie"
+  },
+  {
+   "name": "Wee Joker",
+   "effect": "This Joker gains +8 chips when each played 2 is scored",
+   "rarity": "Rare",
+   "price": 8,
+   "type": "Chips",
+   "activation": "Mixed",
+   "unlock": "Win a run in 18 or fewer rounds",
+   "number": 124,
+   "wiki": "Wee Joker"
+  },
+  {
+   "name": "Wily Joker",
+   "effect": "+100 chips if played hand contains a",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Chips",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 12,
+   "wiki": "Wily Joker"
+  },
+  {
+   "name": "Wrathful Joker",
+   "effect": "Played cards with suit give +3 mult when scored",
+   "rarity": "Common",
+   "price": 5,
+   "type": "Additive Mult",
+   "activation": "On Scored",
+   "unlock": "",
+   "number": 4,
+   "wiki": "Wrathful Joker"
+  },
+  {
+   "name": "Yorick",
+   "effect": "This Joker gains X1 every 23 [23] cards discarded X1",
+   "rarity": "Legendary",
+   "price": 20,
+   "type": "Multiplicative Mult",
+   "activation": "Mixed",
+   "unlock": "Find this Joker from the Soul card.",
+   "number": 148,
+   "wiki": "Yorick"
+  },
+  {
+   "name": "Zany Joker",
+   "effect": "+12 mult if played hand contains a",
+   "rarity": "Common",
+   "price": 4,
+   "type": "Additive Mult",
+   "activation": "Independent",
+   "unlock": "",
+   "number": 7,
+   "wiki": "Zany Joker"
+  }
+ ],
+ "consumables": [
+  {
+   "name": "Death",
+   "effect": "Select 2 cards, convert the left card into the right card (Drag to rearrange)",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 14,
+   "wiki": "Death"
+  },
+  {
+   "name": "Judgement",
+   "effect": "Creates a random Joker card",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 21,
+   "wiki": "Judgement"
+  },
+  {
+   "name": "Justice",
+   "effect": "Enhances 1 selected card into a Glass Card",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 9,
+   "wiki": "Justice"
+  },
+  {
+   "name": "Strength",
+   "effect": "Increases rank of up to 2 selected cards by 1",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 12,
+   "wiki": "Strength"
+  },
+  {
+   "name": "Temperance",
+   "effect": "Gives the total sell value of all current Jokers (Max of $50)",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 15,
+   "wiki": "Temperance"
+  },
+  {
+   "name": "The Chariot",
+   "effect": "Enhances 1 selected card into a Steel Card",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 8,
+   "wiki": "The Chariot"
+  },
+  {
+   "name": "The Devil",
+   "effect": "Enhances 1 selected card into a Gold Card",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 16,
+   "wiki": "The Devil"
+  },
+  {
+   "name": "The Emperor",
+   "effect": "Creates up to 2 random Tarot cards",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 5,
+   "wiki": "The Emperor"
+  },
+  {
+   "name": "The Empress",
+   "effect": "Enhances 2 selected cards to Mult Cards",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 4,
+   "wiki": "The Empress"
+  },
+  {
+   "name": "The Fool",
+   "effect": "Creates the last or card used during this run The Fool excluded",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 1,
+   "wiki": "The Fool"
+  },
+  {
+   "name": "The Hanged Man",
+   "effect": "Destroys up to 2 selected cards",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 13,
+   "wiki": "The Hanged Man"
+  },
+  {
+   "name": "The Hermit",
+   "effect": "Doubles money (Max of $20)",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 10,
+   "wiki": "The Hermit"
+  },
+  {
+   "name": "The Hierophant",
+   "effect": "Enhances 2 selected cards to Bonus Cards",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 7,
+   "wiki": "The Hierophant"
+  },
+  {
+   "name": "The High Priestess",
+   "effect": "Creates up to 2 random cards",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 3,
+   "wiki": "The High Priestess"
+  },
+  {
+   "name": "The Lovers",
+   "effect": "Enhances 1 selected card into a Wild Card",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 7,
+   "wiki": "The Lovers"
+  },
+  {
+   "name": "The Magician",
+   "effect": "Enhances 2 selected cards to Lucky Cards",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 2,
+   "wiki": "The Magician"
+  },
+  {
+   "name": "The Moon",
+   "effect": "Converts up to 3 selected cards to",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 19,
+   "wiki": "The Moon"
+  },
+  {
+   "name": "The Star",
+   "effect": "Converts up to 3 selected cards to",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 18,
+   "wiki": "The Star"
+  },
+  {
+   "name": "The Sun",
+   "effect": "Converts up to 3 selected cards to",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 20,
+   "wiki": "The Sun"
+  },
+  {
+   "name": "The Tower",
+   "effect": "Enhances 1 selected card into a Stone Card",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 17,
+   "wiki": "The Tower"
+  },
+  {
+   "name": "The Wheel of Fortune",
+   "effect": "1 in 4 chance to add Foil, Holographic, or Polychrome edition to a random Joker",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 11,
+   "wiki": "The Wheel of Fortune"
+  },
+  {
+   "name": "The World",
+   "effect": "Converts up to 3 selected cards to",
+   "type": "Tarot",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 22,
+   "wiki": "The World"
+  },
+  {
+   "name": "Ankh",
+   "effect": "Create a copy of a random Joker, destroy all other Jokers (Removes Negative from copy)",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 11,
+   "wiki": "Ankh"
+  },
+  {
+   "name": "Aura",
+   "effect": "Add Foil, Holographic, or Polychrome effect to 1 selected card in hand",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 5,
+   "wiki": "Aura"
+  },
+  {
+   "name": "Black Hole",
+   "effect": "Upgrade every poker hand by 1 level",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 2,
+   "unlock": "Available from start.",
+   "number": 18,
+   "wiki": "Black Hole"
+  },
+  {
+   "name": "Cryptid",
+   "effect": "Create 2 copies of 1 selected card in your hand",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 16,
+   "wiki": "Cryptid"
+  },
+  {
+   "name": "Deja Vu",
+   "effect": "Add a Red Seal to 1 selected card in your hand",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 12,
+   "wiki": "Deja Vu"
+  },
+  {
+   "name": "Ectoplasm",
+   "effect": "Add Negative to a random Joker, -1 hand size",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 9,
+   "wiki": "Ectoplasm"
+  },
+  {
+   "name": "Familiar",
+   "effect": "Destroy 1 random card in your hand, add 3 random Enhanced face cards to your hand",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 1,
+   "wiki": "Familiar"
+  },
+  {
+   "name": "Grim",
+   "effect": "Destroy 1 random card in your hand, add 2 random Enhanced Aces to your hand",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 2,
+   "wiki": "Grim"
+  },
+  {
+   "name": "Hex",
+   "effect": "Add Polychrome to a random Joker, destroy all other Jokers",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 13,
+   "wiki": "Hex"
+  },
+  {
+   "name": "Immolate",
+   "effect": "Destroys 5 random cards in hand, gain $20",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 10,
+   "wiki": "Immolate"
+  },
+  {
+   "name": "Incantation",
+   "effect": "Destroy 1 random card in your hand, add 4 random Enhanced numbered cards to your hand",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 3,
+   "wiki": "Incantation"
+  },
+  {
+   "name": "Medium",
+   "effect": "Add a Purple Seal to 1 selected card in your hand",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 15,
+   "wiki": "Medium"
+  },
+  {
+   "name": "Ouija",
+   "effect": "Converts all cards in hand to a single random rank -1 hand size",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 8,
+   "wiki": "Ouija"
+  },
+  {
+   "name": "Sigil",
+   "effect": "Converts all cards in hand to a single random suit",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 7,
+   "wiki": "Sigil"
+  },
+  {
+   "name": "Talisman",
+   "effect": "Add a Gold Seal to 1 selected card in your hand",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 4,
+   "wiki": "Talisman"
+  },
+  {
+   "name": "The Soul",
+   "effect": "Creates a Legendary Joker",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 2,
+   "unlock": "Available from start.",
+   "number": 17,
+   "wiki": "The Soul"
+  },
+  {
+   "name": "Trance",
+   "effect": "Add a Blue Seal to 1 selected card in your hand",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 14,
+   "wiki": "Trance"
+  },
+  {
+   "name": "Wraith",
+   "effect": "Creates a random Rare Joker, sets money to",
+   "type": "Spectral",
+   "price": 4,
+   "sellprice": 0,
+   "unlock": "Available from start.",
+   "number": 6,
+   "wiki": "Wraith"
+  },
+  {
+   "name": "Ceres",
+   "effect": "Increases hand value by +4 mult and +40 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Play during the current run",
+   "number": 11,
+   "wiki": "Ceres"
+  },
+  {
+   "name": "Earth",
+   "effect": "Increases hand value by +2 mult and +25 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 7,
+   "wiki": "Earth"
+  },
+  {
+   "name": "Eris",
+   "effect": "Increases hand value by +3 mult and +50 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Play during the current run",
+   "number": 12,
+   "wiki": "Eris"
+  },
+  {
+   "name": "Jupiter",
+   "effect": "Increases hand value by +2 mult and +15 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 6,
+   "wiki": "Jupiter"
+  },
+  {
+   "name": "Mars",
+   "effect": "Increases hand value by +3 mult and +30 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 8,
+   "wiki": "Mars"
+  },
+  {
+   "name": "Mercury",
+   "effect": "Increases hand value by +1 mult and +15 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 2,
+   "wiki": "Mercury"
+  },
+  {
+   "name": "Neptune",
+   "effect": "Increases hand value by +4 mult and +40 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 9,
+   "wiki": "Neptune"
+  },
+  {
+   "name": "Planet X",
+   "effect": "Increases hand value by +3 mult and +35 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Play during the current run",
+   "number": 10,
+   "wiki": "Planet X"
+  },
+  {
+   "name": "Pluto",
+   "effect": "Increases hand value by +1 mult and +10 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 1,
+   "wiki": "Pluto"
+  },
+  {
+   "name": "Saturn",
+   "effect": "Increases hand value by +3 mult and +30 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 5,
+   "wiki": "Saturn"
+  },
+  {
+   "name": "Uranus",
+   "effect": "Increases hand value by +1 mult and +20 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 3,
+   "wiki": "Uranus"
+  },
+  {
+   "name": "Venus",
+   "effect": "Increases hand value by +2 mult and +20 chips",
+   "type": "Planet",
+   "price": 3,
+   "sellprice": 1,
+   "unlock": "Available from start.",
+   "number": 4,
+   "wiki": "Venus"
+  }
+ ],
+ "vouchers": [
+  {
+   "name": "Antimatter",
+   "effect": "+1 Joker Slot",
+   "type": "Upgraded",
+   "unlock": "Redeem Blank 10 total times",
+   "previous": "Blank",
+   "notes": "If all vouchers have been purchased in a run, Blank will appear in the shop.",
+   "number": 24,
+   "wiki": "Antimatter"
+  },
+  {
+   "name": "Blank",
+   "effect": "Does nothing?",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 23,
+   "wiki": "Blank"
+  },
+  {
+   "name": "Clearance Sale",
+   "effect": "All cards and packs in shop are 25% off",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 3,
+   "wiki": "Clearance Sale"
+  },
+  {
+   "name": "Crystal Ball",
+   "effect": "+1 consumable slot",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 9,
+   "wiki": "Crystal Ball"
+  },
+  {
+   "name": "Director's Cut",
+   "effect": "Reroll Boss Blind 1 time per Ante, $10 per roll",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 29,
+   "wiki": "Director's Cut"
+  },
+  {
+   "name": "Glow Up",
+   "effect": "Foil, Holographic, and Polychrome cards appear 4X more often",
+   "type": "Upgraded",
+   "unlock": "Have at least 5 Joker cards with Foil, Holographic, or Polychrome (or Negative) effect",
+   "previous": "Hone",
+   "notes": "Polychrome on Jokers actually appears 3x more often for Hone and 7x more often for Glow Up",
+   "number": 6,
+   "wiki": "Glow Up"
+  },
+  {
+   "name": "Grabber",
+   "effect": "Permanently gain +1 hand per round",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 13,
+   "wiki": "Grabber"
+  },
+  {
+   "name": "Hieroglyph",
+   "effect": "-1 Ante, -1 hand each round",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 27,
+   "wiki": "Hieroglyph"
+  },
+  {
+   "name": "Hone",
+   "effect": "Foil, Holographic, and Polychrome cards appear 2X more often",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 5,
+   "wiki": "Hone"
+  },
+  {
+   "name": "Illusion",
+   "effect": "Playing cards in shop may have an Enhancement, Edition, and/or a Seal",
+   "type": "Upgraded",
+   "unlock": "Buy a total of 20 Playing cards from the shop",
+   "previous": "Magic Trick",
+   "notes": "Illusion is currently (v1.0.1o-FULL) bugged, and cards in the shop cannot have seals, only enhancements and/or editions, and is unaffected by Hone/Glow Up.",
+   "number": 26,
+   "wiki": "Illusion"
+  },
+  {
+   "name": "Liquidation",
+   "effect": "All cards and packs in shop are 50% off",
+   "type": "Upgraded",
+   "unlock": "Redeem at least 10 Voucher cards in one run",
+   "previous": "Clearance Sale",
+   "notes": "Also reduces the sell value of your present jokers Prices are rounded half down",
+   "number": 4,
+   "wiki": "Liquidation"
+  },
+  {
+   "name": "Magic Trick",
+   "effect": "Playing cards can be purchased from the shop",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 25,
+   "wiki": "Magic Trick"
+  },
+  {
+   "name": "Money Tree",
+   "effect": "Raise the cap on interest earned in each round to $20",
+   "type": "Upgraded",
+   "unlock": "Max out the interest per round earnings for ten consecutive rounds",
+   "previous": "Seed Money",
+   "notes": "Does nothing when playing on or the challenge.",
+   "number": 22,
+   "wiki": "Money Tree"
+  },
+  {
+   "name": "Nacho Tong",
+   "effect": "Permanently gain an additional +1 hand per round",
+   "type": "Upgraded",
+   "unlock": "Play a total of 2,500 cards",
+   "previous": "Grabber",
+   "notes": "",
+   "number": 14,
+   "wiki": "Nacho Tong"
+  },
+  {
+   "name": "Observatory",
+   "effect": "cards in your consumable area give X1.5 for their specified poker hand",
+   "type": "Upgraded",
+   "unlock": "Use a total of 25 Planet cards from any Celestial Pack",
+   "previous": "Telescope",
+   "notes": "Telescope picks the higher tier hand in case of multiple most played hands",
+   "number": 12,
+   "wiki": "Observatory"
+  },
+  {
+   "name": "Omen Globe",
+   "effect": "cards may appear in any of the Arcana Packs",
+   "type": "Upgraded",
+   "unlock": "Use a total of 25 Tarot cards from booster packs",
+   "previous": "Crystal Ball",
+   "notes": "Omen Globe has a 20% individual chance to replace the Tarot card with a Spectral card for every card in the Arcana Pack",
+   "number": 10,
+   "wiki": "Omen Globe"
+  },
+  {
+   "name": "Overstock",
+   "effect": "+1 card slot available in shop",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 1,
+   "wiki": "Overstock"
+  },
+  {
+   "name": "Overstock Plus",
+   "effect": "+1 card slot available in shop",
+   "type": "Upgraded",
+   "unlock": "Spend a total of $2500 at the shop",
+   "previous": "Overstock",
+   "notes": "Also immediately restocks any empty card slots in the Shop when purchased.",
+   "number": 2,
+   "wiki": "Overstock Plus"
+  },
+  {
+   "name": "Paint Brush",
+   "effect": "+1 hand size",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 31,
+   "wiki": "Paint Brush"
+  },
+  {
+   "name": "Palette",
+   "effect": "+1 hand size",
+   "type": "Upgraded",
+   "unlock": "Reduce your hand size down to five cards.",
+   "previous": "Paint Brush",
+   "notes": "",
+   "number": 32,
+   "wiki": "Palette"
+  },
+  {
+   "name": "Petroglyph",
+   "effect": "-1 Ante, -1 discard each round",
+   "type": "Upgraded",
+   "unlock": "Reach Ante 12",
+   "previous": "Hieroglyph",
+   "notes": "",
+   "number": 28,
+   "wiki": "Petroglyph"
+  },
+  {
+   "name": "Planet Merchant",
+   "effect": "cards appear 2X more frequently in the shop",
+   "type": "Base",
+   "unlock": "",
+   "previous": "Planet Tycoon",
+   "notes": "",
+   "number": 19,
+   "wiki": "Planet Merchant"
+  },
+  {
+   "name": "Planet Tycoon",
+   "effect": "cards appear 4X more frequently in the shop",
+   "type": "Upgraded",
+   "unlock": "Buy a total of 50 Planet cards from the shop",
+   "previous": "Planet Merchant",
+   "notes": "",
+   "number": 20,
+   "wiki": "Planet Tycoon"
+  },
+  {
+   "name": "Recyclomancy",
+   "effect": "Permanently gain an additional +1 discard each round",
+   "type": "Upgraded",
+   "unlock": "Discard a total of 2500 cards",
+   "previous": "Wasteful",
+   "notes": "",
+   "number": 16,
+   "wiki": "Recyclomancy"
+  },
+  {
+   "name": "Reroll Glut",
+   "effect": "Rerolls cost an additional $2 less",
+   "type": "Upgraded",
+   "unlock": "Reroll the shop a total of 100 times",
+   "previous": "Reroll Surplus",
+   "notes": "",
+   "number": 8,
+   "wiki": "Reroll Glut"
+  },
+  {
+   "name": "Reroll Surplus",
+   "effect": "Rerolls cost $2 less",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 7,
+   "wiki": "Reroll Surplus"
+  },
+  {
+   "name": "Retcon",
+   "effect": "Reroll Boss Blind unlimited times, $10 per roll",
+   "type": "Upgraded",
+   "unlock": "Discover 25 Blinds",
+   "previous": "Director's Cut",
+   "notes": "",
+   "number": 30,
+   "wiki": "Retcon"
+  },
+  {
+   "name": "Seed Money",
+   "effect": "Raise the cap on interest earned in each round to $10",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 21,
+   "wiki": "Seed Money"
+  },
+  {
+   "name": "Tarot Merchant",
+   "effect": "cards appear 2X more frequently in the shop",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 17,
+   "wiki": "Tarot Merchant"
+  },
+  {
+   "name": "Tarot Tycoon",
+   "effect": "cards appear 4X more frequently in the shop",
+   "type": "Upgraded",
+   "unlock": "Buy a total of 50 Tarot cards from the shop",
+   "previous": "Tarot Merchant",
+   "notes": "",
+   "number": 18,
+   "wiki": "Tarot Tycoon"
+  },
+  {
+   "name": "Telescope",
+   "effect": "Celestial Packs always contain the card for your most played poker hand",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 11,
+   "wiki": "Telescope"
+  },
+  {
+   "name": "Wasteful",
+   "effect": "Permanently gain +1 discard each round",
+   "type": "Base",
+   "unlock": "",
+   "previous": "",
+   "notes": "",
+   "number": 15,
+   "wiki": "Wasteful"
+  }
+ ],
+ "tags": [
+  {
+   "name": "Boss Tag",
+   "effect": "Rerolls the Boss Blind",
+   "ante": "Any",
+   "unlock": "",
+   "number": 9,
+   "wiki": "Boss Tag"
+  },
+  {
+   "name": "Buffoon Tag",
+   "effect": "Gives a free Mega Buffoon Pack",
+   "ante": "2+",
+   "unlock": "",
+   "number": 13,
+   "wiki": "Buffoon Tag"
+  },
+  {
+   "name": "Charm Tag",
+   "effect": "Gives a free Mega Arcana Pack",
+   "ante": "Any",
+   "unlock": "",
+   "number": 11,
+   "wiki": "Charm Tag"
+  },
+  {
+   "name": "Coupon Tag",
+   "effect": "Initial cards and booster packs in next shop are free",
+   "ante": "Any",
+   "unlock": "",
+   "number": 17,
+   "wiki": "Coupon Tag"
+  },
+  {
+   "name": "D6 Tag",
+   "effect": "Rerolls in next shop start at $0",
+   "ante": "Any",
+   "unlock": "",
+   "number": 20,
+   "wiki": "D6 Tag"
+  },
+  {
+   "name": "Double Tag",
+   "effect": "Gives a copy of the next selected Tag Double Tag excluded",
+   "ante": "Any",
+   "unlock": "",
+   "number": 18,
+   "wiki": "Double Tag"
+  },
+  {
+   "name": "Economy Tag",
+   "effect": "Doubles your money (Max of $40)",
+   "ante": "Any",
+   "unlock": "",
+   "number": 24,
+   "wiki": "Economy Tag"
+  },
+  {
+   "name": "Ethereal Tag",
+   "effect": "Gives a free Spectral Pack",
+   "ante": "2+",
+   "unlock": "",
+   "number": 16,
+   "wiki": "Ethereal Tag"
+  },
+  {
+   "name": "Foil Tag",
+   "effect": "Next base edition shop Joker is free and becomes Foil",
+   "ante": "Any",
+   "unlock": "Discover the edition",
+   "number": 4,
+   "wiki": "Foil Tag"
+  },
+  {
+   "name": "Garbage Tag",
+   "effect": "Gives $1 per unused discard this run (Will give $0)",
+   "ante": "2+",
+   "unlock": "",
+   "number": 15,
+   "wiki": "Garbage Tag"
+  },
+  {
+   "name": "Handy Tag",
+   "effect": "Gives $1 per played hand this run (Will give $0)",
+   "ante": "2+",
+   "unlock": "",
+   "number": 14,
+   "wiki": "Handy Tag"
+  },
+  {
+   "name": "Holographic Tag",
+   "effect": "Next base edition shop Joker is free and becomes Holographic",
+   "ante": "Any",
+   "unlock": "Discover the edition",
+   "number": 5,
+   "wiki": "Holographic Tag"
+  },
+  {
+   "name": "Investment Tag",
+   "effect": "After defeating the Boss Blind, gain .",
+   "ante": "Any",
+   "unlock": "",
+   "number": 7,
+   "wiki": "Investment Tag"
+  },
+  {
+   "name": "Juggle Tag",
+   "effect": "+3 hand size next round",
+   "ante": "Any",
+   "unlock": "",
+   "number": 19,
+   "wiki": "Juggle Tag"
+  },
+  {
+   "name": "Meteor Tag",
+   "effect": "Gives a free Mega Celestial Pack",
+   "ante": "2+",
+   "unlock": "",
+   "number": 12,
+   "wiki": "Meteor Tag"
+  },
+  {
+   "name": "Negative Tag",
+   "effect": "Next base edition shop Joker is free and becomes Negative",
+   "ante": "2+",
+   "unlock": "Discover the edition",
+   "number": 3,
+   "wiki": "Negative Tag"
+  },
+  {
+   "name": "Orbital Tag",
+   "effect": "Upgrade [poker hand] by 3 levels",
+   "ante": "2+",
+   "unlock": "",
+   "number": 23,
+   "wiki": "Orbital Tag"
+  },
+  {
+   "name": "Polychrome Tag",
+   "effect": "Next base edition shop Joker is free and becomes Polychrome",
+   "ante": "Any",
+   "unlock": "Discover the edition",
+   "number": 6,
+   "wiki": "Polychrome Tag"
+  },
+  {
+   "name": "Rare Tag",
+   "effect": "Shop has a free Rare Joker",
+   "ante": "Any",
+   "unlock": "Discover",
+   "number": 2,
+   "wiki": "Rare Tag"
+  },
+  {
+   "name": "Speed Tag",
+   "effect": "Gives $5 per skipped Blind this run (Will give $5)",
+   "ante": "Any",
+   "unlock": "",
+   "number": 22,
+   "wiki": "Speed Tag"
+  },
+  {
+   "name": "Standard Tag",
+   "effect": "Gives a free Mega Standard Pack",
+   "ante": "2+",
+   "unlock": "",
+   "number": 10,
+   "wiki": "Standard Tag"
+  },
+  {
+   "name": "Top-up Tag",
+   "effect": "Create up to 2 Common Jokers",
+   "ante": "2+",
+   "unlock": "",
+   "number": 21,
+   "wiki": "Top-up Tag"
+  },
+  {
+   "name": "Uncommon Tag",
+   "effect": "Shop has a free Uncommon Joker",
+   "ante": "Any",
+   "unlock": "",
+   "number": 1,
+   "wiki": "Uncommon Tag"
+  },
+  {
+   "name": "Voucher Tag",
+   "effect": "Adds one Voucher to the next shop",
+   "ante": "Any",
+   "unlock": "",
+   "number": 8,
+   "wiki": "Voucher Tag"
+  }
+ ],
+ "boss_blinds": [
+  {
+   "name": "The Arm",
+   "effect": "Decrease level of played poker hand",
+   "ante": 2,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 8,
+   "wiki": "The Arm"
+  },
+  {
+   "name": "The Club",
+   "effect": "All Club cards are debuffed",
+   "ante": 1,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 9,
+   "wiki": "The Club"
+  },
+  {
+   "name": "The Eye",
+   "effect": "No repeat hand types this round",
+   "ante": 3,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 16,
+   "wiki": "The Eye"
+  },
+  {
+   "name": "The Fish",
+   "effect": "Cards drawn face down after each hand played",
+   "ante": 2,
+   "score": "2",
+   "reward": 5,
+   "matador": "no",
+   "number": 10,
+   "wiki": "The Fish"
+  },
+  {
+   "name": "The Flint",
+   "effect": "Base Chips and Mult are halved",
+   "ante": 2,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 24,
+   "wiki": "The Flint"
+  },
+  {
+   "name": "The Goad",
+   "effect": "All Spade cards are debuffed",
+   "ante": 1,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 12,
+   "wiki": "The Goad"
+  },
+  {
+   "name": "The Head",
+   "effect": "All Heart cards are debuffed",
+   "ante": 1,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 22,
+   "wiki": "The Head"
+  },
+  {
+   "name": "The Hook",
+   "effect": "Discards 2 random cards per hand played",
+   "ante": 1,
+   "score": "2",
+   "reward": 5,
+   "matador": "no",
+   "number": 3,
+   "wiki": "The Hook"
+  },
+  {
+   "name": "The House",
+   "effect": "First hand is drawn face down",
+   "ante": 2,
+   "score": "2",
+   "reward": 5,
+   "matador": "no",
+   "number": 5,
+   "wiki": "The House"
+  },
+  {
+   "name": "The Manacle",
+   "effect": "-1 Hand Size",
+   "ante": 1,
+   "score": "2",
+   "reward": 5,
+   "matador": "no",
+   "number": 15,
+   "wiki": "The Manacle"
+  },
+  {
+   "name": "The Mark",
+   "effect": "All face cards are drawn face down",
+   "ante": 2,
+   "score": "2",
+   "reward": 5,
+   "matador": "no",
+   "number": 25,
+   "wiki": "The Mark"
+  },
+  {
+   "name": "The Mouth",
+   "effect": "Play only 1 hand type this round",
+   "ante": 2,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 17,
+   "wiki": "The Mouth"
+  },
+  {
+   "name": "The Needle",
+   "effect": "Play only 1 hand",
+   "ante": 2,
+   "score": "1",
+   "reward": 5,
+   "matador": "no",
+   "number": 21,
+   "wiki": "The Needle"
+  },
+  {
+   "name": "The Ox",
+   "effect": "Playing a (most played hand) sets money to $0",
+   "ante": 6,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 4,
+   "wiki": "The Ox"
+  },
+  {
+   "name": "The Pillar",
+   "effect": "Cards played previously this Ante are debuffed",
+   "ante": 1,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 20,
+   "wiki": "The Pillar"
+  },
+  {
+   "name": "The Plant",
+   "effect": "All face cards are debuffed",
+   "ante": 4,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 18,
+   "wiki": "The Plant"
+  },
+  {
+   "name": "The Psychic",
+   "effect": "Must play 5 cards",
+   "ante": 1,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 11,
+   "wiki": "The Psychic"
+  },
+  {
+   "name": "The Serpent",
+   "effect": "After Play or Discard, always draw 3 cards",
+   "ante": 5,
+   "score": "2",
+   "reward": 5,
+   "matador": "no",
+   "number": 19,
+   "wiki": "The Serpent"
+  },
+  {
+   "name": "The Tooth",
+   "effect": "Lose $1 per card played",
+   "ante": 3,
+   "score": "2",
+   "reward": 5,
+   "matador": "no",
+   "number": 23,
+   "wiki": "The Tooth"
+  },
+  {
+   "name": "The Wall",
+   "effect": "Extra large blind",
+   "ante": 2,
+   "score": "4",
+   "reward": 5,
+   "matador": "no",
+   "number": 6,
+   "wiki": "The Wall"
+  },
+  {
+   "name": "The Water",
+   "effect": "Start with 0 discards",
+   "ante": 2,
+   "score": "2",
+   "reward": 5,
+   "matador": "no",
+   "number": 13,
+   "wiki": "The Water"
+  },
+  {
+   "name": "The Wheel",
+   "effect": "1 in 7 cards get drawn face down",
+   "ante": 2,
+   "score": "2",
+   "reward": 5,
+   "matador": "no",
+   "number": 7,
+   "wiki": "The Wheel"
+  },
+  {
+   "name": "The Window",
+   "effect": "All Diamond cards are debuffed",
+   "ante": 1,
+   "score": "2",
+   "reward": 5,
+   "matador": "yes",
+   "number": 14,
+   "wiki": "The Window"
+  }
+ ],
+ "enhancements": [
+  {
+   "name": "Bonus card",
+   "effect": "+30 extra chips",
+   "wiki": "Bonus cards"
+  },
+  {
+   "name": "Glass card",
+   "effect": "X2 1 in 4 chance to destroy card",
+   "wiki": "Glass cards"
+  },
+  {
+   "name": "Gold card",
+   "effect": "$3 if this card is held in hand at end of round",
+   "wiki": "Gold cards"
+  },
+  {
+   "name": "Lucky card",
+   "effect": "1 in 5 chance for +20 mult 1 in 15 chance to win $20",
+   "wiki": "Lucky cards"
+  },
+  {
+   "name": "Mult card",
+   "effect": "+4 mult",
+   "wiki": "Mult cards"
+  },
+  {
+   "name": "Steel card",
+   "effect": "X1.5 while this card stays in hand",
+   "wiki": "Steel cards"
+  },
+  {
+   "name": "Stone card",
+   "effect": "+50 chips no rank or suit",
+   "wiki": "Stone cards"
+  },
+  {
+   "name": "Wild card",
+   "effect": "Can be used as any suit",
+   "wiki": "Wild cards"
+  }
+ ],
+ "seals": [
+  {
+   "name": "Blue Seal",
+   "effect": "Creates the card for final played poker hand of round if held in hand",
+   "wiki": "Blue Seal"
+  },
+  {
+   "name": "Gold Seal",
+   "effect": "Earn $3 when this card is played and scores",
+   "wiki": "Gold Seal"
+  },
+  {
+   "name": "Purple Seal",
+   "effect": "Creates a card when discarded",
+   "wiki": "Purple Seal"
+  },
+  {
+   "name": "Red Seal",
+   "effect": "Retrigger this card 1 time",
+   "wiki": "Red Seal"
+  }
+ ],
+ "decks": [
+  {
+   "name": "Abandoned Deck",
+   "effect": "",
+   "unlock": "Win a run with the on any difficulty",
+   "wiki": "Abandoned Deck"
+  },
+  {
+   "name": "Anaglyph Deck",
+   "effect": "",
+   "unlock": "Win a run with any deck on the difficulty or harder",
+   "wiki": "Anaglyph Deck"
+  },
+  {
+   "name": "Black Deck",
+   "effect": "",
+   "unlock": "Discover at least 100 items from your collection",
+   "wiki": "Black Deck"
+  },
+  {
+   "name": "Blue Deck",
+   "effect": "",
+   "unlock": "Discover at least 20 items from your collection",
+   "wiki": "Blue Deck"
+  },
+  {
+   "name": "Challenge Deck",
+   "effect": "",
+   "unlock": "Challenge Mode is unlocked by winning a regular run with five different decks.",
+   "wiki": "Challenge Decks"
+  },
+  {
+   "name": "Checkered Deck",
+   "effect": "",
+   "unlock": "Win a run with the on any difficulty",
+   "wiki": "Checkered Deck"
+  },
+  {
+   "name": "Erratic Deck",
+   "effect": "",
+   "unlock": "Win a run with any deck on the difficulty or harder",
+   "wiki": "Erratic Deck"
+  },
+  {
+   "name": "Ghost Deck",
+   "effect": "",
+   "unlock": "Win a run with the on any difficulty",
+   "wiki": "Ghost Deck"
+  },
+  {
+   "name": "Green Deck",
+   "effect": "",
+   "unlock": "Discover at least 75 items from your collection",
+   "wiki": "Green Deck"
+  },
+  {
+   "name": "Magic Deck",
+   "effect": "",
+   "unlock": "Win a run with the on any difficulty",
+   "wiki": "Magic Deck"
+  },
+  {
+   "name": "Nebula Deck",
+   "effect": "",
+   "unlock": "Win a run with the on any difficulty",
+   "wiki": "Nebula Deck"
+  },
+  {
+   "name": "Painted Deck",
+   "effect": "",
+   "unlock": "Win a run with any deck on the difficulty or harder",
+   "wiki": "Painted Deck"
+  },
+  {
+   "name": "Plasma Deck",
+   "effect": "",
+   "unlock": "Win a run with any deck on the difficulty or harder",
+   "wiki": "Plasma Deck"
+  },
+  {
+   "name": "Red Deck",
+   "effect": "",
+   "unlock": "Unlocked from start",
+   "wiki": "Red Deck"
+  },
+  {
+   "name": "Yellow Deck",
+   "effect": "",
+   "unlock": "Discover at least 50 items from your collection",
+   "wiki": "Yellow Deck"
+  },
+  {
+   "name": "Zodiac Deck",
+   "effect": "",
+   "unlock": "Win a run with any deck on the difficulty or harder",
+   "wiki": "Zodiac Deck"
+  }
+ ]
+}
