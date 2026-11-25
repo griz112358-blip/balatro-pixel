@@ -73,6 +73,7 @@ export const EN = {
   'ui.escResume': 'ESC resume   Q quit',
   'ui.close': 'Close',
   'ui.sell': 'Sell $%d',
+  'ui.sellValue': 'Sell value: $%d',
   'ui.rarity': 'Rarity: %s',
   'ui.basePrice': 'Base price: $%d',
   'ui.edition': 'Edition: %s',

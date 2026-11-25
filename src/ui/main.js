@@ -570,8 +570,14 @@ class Game {
     // The target a joker aims at this round.
     const target = cardKind(tip.item) === 'joker' ? jokerTargetText(tip.item) : '';
     const targetText = target ? tf('ui.jokerTarget', target) : '';
+    // What the card is worth, for the cards the player owns. The Egg and the
+    // Gift Card push this number up over the rounds.
+    const owned = cardKind(tip.item) === 'joker'
+      ? this.run.jokers.includes(tip.item)
+      : this.run.consumables.includes(tip.item);
+    const valueText = owned ? tf('ui.sellValue', computeSellValue(this.run, tip.item)) : '';
     const th = 9 + titleSize + 4 + lines.length * (size + 1)
-      + (targetText ? size + 4 : 0) + 5;
+      + (targetText ? size + 4 : 0) + (valueText ? size + 4 : 0) + 5;
 
     // Next to the card: to the right for the left column, to the left for
     // the right column.
@@ -589,9 +595,13 @@ class Game {
     lines.forEach((ln, i) => {
       text(ctx, ln, tx + 8, ty + 8 + titleSize + 4 + i * (size + 1), PALETTE.cream, size);
     });
+    let ry = ty + 8 + titleSize + 4 + lines.length * (size + 1);
     if (targetText) {
-      text(ctx, targetText, tx + 8, ty + 8 + titleSize + 4 + lines.length * (size + 1) + 3,
-        PALETTE.pink, size);
+      text(ctx, targetText, tx + 8, ry + 3, PALETTE.pink, size);
+      ry += size + 4;
+    }
+    if (valueText) {
+      text(ctx, valueText, tx + 8, ry + 3, PALETTE.yellow, size);
     }
   }
 
@@ -1382,6 +1392,8 @@ class Game {
     if (joker.eternal) lines.push(t('ui.eternal'));
     if (joker.perishable) lines.push(t('ui.perishable'));
     if (joker.rental) lines.push(t('ui.rental'));
+    // What the card is worth right now. The Egg and the Gift Card push it up.
+    if (sellable) lines.push(tf('ui.sellValue', computeSellValue(this.run, joker)));
     // The target a joker aims at this round.
     const target = jokerTargetText(joker);
     if (target) lines.push(tf('ui.jokerTarget', target));
@@ -1397,10 +1409,12 @@ class Game {
   }
 
   showConsumableDetail(c, sellable = false) {
+    const lines = [tf('ui.type', cn() ? name(c.type, 'consumableType') : c.type.toUpperCase())];
+    if (sellable) lines.push(tf('ui.sellValue', computeSellValue(this.run, c)));
     this.detail = {
       title: cn() ? displayName(c) : c.name.toUpperCase(),
       kind: 'consumable',
-      lines: [tf('ui.type', cn() ? name(c.type, 'consumableType') : c.type.toUpperCase())],
+      lines,
       desc: effect(c.name, c.type.toLowerCase(), c.desc || '', consumableParams(c)),
       sellable,
       item: c,
@@ -1429,12 +1443,13 @@ class Game {
         text(ctx, ln, x + 10, ly + i * (cs(6) + 1), PALETTE.cream, cs(6));
       });
     }
-    if (d.sellable && d.joker) {
-      const value = computeSellValue(this.run, d.joker);
+    const owned = d.joker || d.item;
+    if (d.sellable && owned) {
+      const value = computeSellValue(this.run, owned);
       this.buttons.push(new Button(x + 10, y + h - 28, 100, 18, tf('ui.sell', value), () => {
-        sellCard(this.run, d.joker);
+        sellCard(this.run, owned);
         this.detail = null;
-        this.showToast(tf('ui.sold', name(d.joker.name, 'joker'), value));
+        this.showToast(tf('ui.sold', displayName(owned), value));
       }, { color: PALETTE.red, border: PALETTE.lightRed }));
     }
     this.buttons.push(new Button(x + w - 90, y + h - 28, 80, 18, t('ui.close'), () => {

@@ -5,6 +5,7 @@
 import {
   effectiveRank, isFace, isEven, isOdd, matchesSuit, SUITS, rankChips,
 } from './cards.js';
+import { computeSellValue } from './value.js';
 
 const has = (ctx, id) => ctx.contained.has(id);
 const contains = (ctx, id) => ctx.contained.has(id);
@@ -267,7 +268,7 @@ export const JOKERS = {
     activation: 'independent',
     fn: (s, ctx, j) => {
       const others = s.jokers.filter((k) => k !== j);
-      ctx.mult += others.reduce((a, k) => a + k.sellValue, 0);
+      ctx.mult += others.reduce((a, k) => a + computeSellValue(s, k), 0);
     },
   },
   'Fortune Teller': {

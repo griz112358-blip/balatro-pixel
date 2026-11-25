@@ -4,7 +4,9 @@ import { makeCard, SUITS } from '../src/engine/cards.js';
 import { Run } from '../src/engine/run.js';
 import { jokerTarget } from '../src/engine/jokers.js';
 import { anteBase, blindScore, BOSS_BLINDS } from '../src/engine/blinds.js';
-import { createShop, sellCard, computeSellValue } from '../src/engine/shop.js';
+import { createShop, buyCard, sellCard, computeSellValue, computeBuyCost } from '../src/engine/shop.js';
+import { roundHalfDown } from '../src/engine/value.js';
+import { JOKERS } from '../src/engine/jokers.js';
 import { readFileSync } from 'node:fs';
 import { JOKER_DESCRIPTIONS } from '../src/data/descriptions.js';
 
@@ -819,6 +821,106 @@ check('plasma doubles', blindScore(1, 'white', 1, true), 600);
   check('burnt joker levels the discarded hand', run.handLevels.pair, 2);
   check('burnt joker leaves the other hands alone', run.handLevels.high_card, 1);
 }
+
+// --- what a card is worth ---
+// Regression: the sell value used to be worked out from the buy price of a
+// card that no longer had one, so every joker sold for $1 and the Egg never
+// grew no matter how many rounds it survived.
+{
+  const run = new Run({ seed: 110 });
+  run.selectBlind('small');
+  const egg = run.createJoker('Egg');
+  check('the egg starts worth $2', computeSellValue(run, egg), 2);
+  run.runEndOfRoundJokers();
+  check('the egg grows by $3 a round', computeSellValue(run, egg), 5);
+  run.runEndOfRoundJokers();
+  check('the egg keeps growing', computeSellValue(run, egg), 8);
+  const money = run.money;
+  const value = computeSellValue(run, egg);
+  sellCard(run, egg);
+  check('selling the egg pays the grown value', run.money, money + value);
+  check('selling the egg takes it out of the run', run.jokers.length, 0);
+}
+
+// A card sells for half of what it costs.
+{
+  const run = new Run({ seed: 111 });
+  const joker = run.createJoker('Joker');
+  const raised = run.createJoker('Raised Fist');
+  check('a $2 joker sells for $1', computeSellValue(run, joker), 1);
+  check('a $5 joker sells for $2', computeSellValue(run, raised), 2);
+}
+
+// An edition raises the sell value as well as the price.
+{
+  const run = new Run({ seed: 112 });
+  const joker = run.createJoker('Joker');
+  joker.edition = 'foil';
+  check('a foil joker sells for $2', computeSellValue(run, joker), 2);
+  joker.edition = 'polychrome';
+  check('a polychrome joker sells for $3', computeSellValue(run, joker), 3);
+}
+
+// Liquidation halves what the jokers you own are worth, but it cannot touch
+// the extra value the Egg and the Gift Card added.
+{
+  const run = new Run({ seed: 113 });
+  run.buyVoucher('Liquidation');
+  const egg = run.createJoker('Egg');
+  check('liquidation halves the egg', computeSellValue(run, egg), 1);
+  run.runEndOfRoundJokers();
+  check('liquidation cannot touch the egg bonus', computeSellValue(run, egg), 4);
+  check('liquidation halves the price', computeBuyCost(run, { kind: 'joker', price: 5 }), 2);
+}
+
+// The Gift Card lifts every joker and consumable at the end of a round.
+{
+  const run = new Run({ seed: 114 });
+  run.createJoker('Gift Card');
+  const other = run.createJoker('Joker');
+  const tarot = run.createConsumable('Tarot');
+  run.runEndOfRoundJokers();
+  check('the gift card lifts the jokers', computeSellValue(run, other), 2);
+  check('the gift card lifts the consumables', computeSellValue(run, tarot), 2);
+}
+
+// Consumables sell for half of what they cost, and a consumable bought in
+// the shop can be sold again.
+{
+  const run = new Run({ seed: 115 });
+  const tarot = run.createConsumable('Tarot');
+  const spectral = run.createConsumable('Spectral');
+  check('a tarot sells for $1', computeSellValue(run, tarot), 1);
+  check('a spectral sells for $2', computeSellValue(run, spectral), 2);
+
+  const shopRun = new Run({ seed: 115 });
+  shopRun.money = 100;
+  buyCard(shopRun, { kind: 'consumable', type: 'Tarot', name: 'The Fool', price: 3, sellBonus: 0 });
+  check('the bought consumable joined the run', shopRun.consumables.length, 1);
+  const value = computeSellValue(shopRun, shopRun.consumables[0]);
+  sellCard(shopRun, shopRun.consumables[0]);
+  check('selling the consumable takes it out of the run', shopRun.consumables.length, 0);
+  check('selling the consumable pays out', shopRun.money, 100 - 3 + value);
+}
+
+// Temperance and Swashbuckler read the same sell value the player would get.
+{
+  const run = new Run({ seed: 116 });
+  const egg = run.createJoker('Egg');
+  run.runEndOfRoundJokers();
+  const temperance = run.createConsumable('Tarot', 'Temperance');
+  const money = run.money;
+  run.useConsumable(temperance);
+  check('temperance pays the sell value of the jokers', run.money, money + 5);
+
+  const swash = run.createJoker('Swashbuckler');
+  const ctx = { mult: 0 };
+  JOKERS['Swashbuckler'].fn(run, ctx, swash);
+  check('swashbuckler counts the grown egg', ctx.mult, 5);
+}
+
+// Balatro rounds shop prices half down: 8.5 becomes 8.
+check('prices round half down', [roundHalfDown(8.5), roundHalfDown(8.6), roundHalfDown(8.4)], [8, 9, 8]);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

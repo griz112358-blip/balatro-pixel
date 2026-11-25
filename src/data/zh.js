@@ -73,6 +73,7 @@ export const ZH = {
   'ui.escResume': 'ESC 继续   Q 退出',
   'ui.close': '关闭',
   'ui.sell': '出售 $%d',
+  'ui.sellValue': '当前售价：$%d',
   'ui.rarity': '稀有度：%s',
   'ui.basePrice': '基础价格：$%d',
   'ui.edition': '版本：%s',

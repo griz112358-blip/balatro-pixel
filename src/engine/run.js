@@ -13,6 +13,7 @@ import { TAROTS, SPECTRALS, PLANETS, VOUCHERS } from './consumables.js';
 import { JOKERS } from './jokers.js';
 import { JOKER_DATA } from '../data/jokers.js';
 import { createShop } from './shop.js';
+import { computeSellValue } from './value.js';
 
 const JOKER_BY_NAME = Object.fromEntries(JOKER_DATA.map((j) => [j.name, j]));
 
@@ -470,7 +471,9 @@ export class Run {
       rarity: meta.rarity || 'Common',
       price: meta.price || 3,
       edition: 'base',
-      sellValue: Math.max(1, Math.floor((meta.price || 3) / 2)),
+      // The Egg and the Gift Card add to this; the sell value is derived
+      // from the price and the edition, plus this bonus.
+      sellBonus: 0,
       debuffed: false,
       eternal: false,
       perishable: false,
@@ -526,7 +529,8 @@ export class Run {
       name,
       desc: meta.desc,
       cost: meta.cost,
-      sellValue: 1,
+      price: meta.cost,
+      sellBonus: 0,
       edition: 'base',
       debuffed: false,
     };
@@ -984,7 +988,7 @@ export class Run {
           const idx = this.jokers.indexOf(j);
           const target = this.jokers[idx + 1];
           if (target) {
-            j.extraMult = (j.extraMult || 0) + 2 * target.sellValue;
+            j.extraMult = (j.extraMult || 0) + 2 * computeSellValue(this, target);
             this.jokers.splice(this.jokers.indexOf(target), 1);
             this.logMsg('log.ceremonialDagger', { joker: target.name });
           }
@@ -1329,10 +1333,10 @@ export class Run {
         case 'Delayed Gratification':
           if (this.discardsLeft === this.discardsAtRoundStart) this.money += 2 * this.discardsAtRoundStart;
           break;
-        case 'Egg': j.sellValue += 3; break;
+        case 'Egg': j.sellBonus = (j.sellBonus || 0) + 3; break;
         case 'Gift Card':
-          this.jokers.forEach((x) => { x.sellValue += 1; });
-          this.consumables.forEach((x) => { x.sellValue += 1; });
+          this.jokers.forEach((x) => { x.sellBonus = (x.sellBonus || 0) + 1; });
+          this.consumables.forEach((x) => { x.sellBonus = (x.sellBonus || 0) + 1; });
           break;
         case 'Cloud 9':
           this.money += this.fullDeck.filter((c) => effectiveRank(c) === 9).length;

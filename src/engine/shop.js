@@ -5,6 +5,13 @@ import { JOKERS } from './jokers.js';
 import { TAROTS, SPECTRALS, PLANETS, VOUCHERS } from './consumables.js';
 import { cardKind } from './cards.js';
 import { rollTag, applyTag, TAGS } from './tags.js';
+import {
+  EDITION_COST, roundHalfDown, shopDiscount, itemCost, computeSellValue,
+} from './value.js';
+
+// The pricing rules live in value.js; they are re-exported here so the rest
+// of the engine has one obvious place to look for them.
+export { EDITION_COST, roundHalfDown, shopDiscount, computeSellValue };
 
 export const PACK_TYPES = ['Arcana', 'Celestial', 'Standard', 'Buffoon', 'Spectral'];
 export const PACK_SIZES = ['Normal', 'Jumbo', 'Mega'];
@@ -33,37 +40,12 @@ export const PACK_WEIGHTS = {
 
 export const CARD_WEIGHTS = { Joker: 20, Tarot: 4, Planet: 4, Spectral: 2 };
 
-export function shopDiscount(run) {
-  if (run.hasVoucher('Liquidation')) return 0.5;
-  if (run.hasVoucher('Clearance Sale')) return 0.75;
-  return 1;
-}
-
-export function roundHalfDown(n) {
-  return Math.floor(n + 0.5) === Math.floor(n) + 1 && n % 1 !== 0 ? Math.ceil(n) : Math.floor(n);
-}
-
 export function computeBuyCost(run, item) {
-  let base = item.price ?? 0;
-  if (item.edition === 'foil') base += 2;
-  else if (item.edition === 'holographic') base += 4;
-  else if (item.edition === 'polychrome') base += 6;
-  else if (item.edition === 'negative') base += 5;
-  if (item.rental) base = 1;
-  let cost = base * shopDiscount(run);
-  cost = Math.floor(cost);
-  if (cost <= 0) cost = 1;
+  let cost = itemCost(run, item);
   if (run.hasJoker('Astronomer') && (item.type === 'Planet' || item.packType === 'Celestial')) cost = 0;
   // The Coupon Tag makes everything in the shop free (vouchers stay pricey).
   if (run.shop && run.shop.tag === 'coupon' && item.kind !== 'voucher') cost = 0;
   return cost;
-}
-
-export function computeSellValue(run, item) {
-  let v = Math.floor(computeBuyCost(run, item) / 2);
-  if (v <= 0) v = 1;
-  if (item.extraSellValue) v += item.extraSellValue;
-  return v;
 }
 
 export function createShop(run) {
@@ -266,13 +248,12 @@ export function buyCard(run, item) {
   }
   run.money -= cost;
   if (item.kind === 'joker') {
+    // The base price stays on the card: the sell value is derived from it.
     const j = { ...item };
-    delete j.kind; delete j.price;
     run.jokers.push(j);
     run.onJokerAcquired(j);
   } else if (item.kind === 'consumable') {
     const c = { ...item };
-    delete c.kind; delete c.price;
     run.consumables.push(c);
   } else {
     run.addCardToDeck(item);
@@ -295,13 +276,11 @@ export function takeFromPack(run, pack, chosen) {
     if (item.kind === 'joker') {
       if (run.jokers.length >= run.jokerSlots) continue;
       const j = { ...item };
-      delete j.kind; delete j.price;
       run.jokers.push(j);
       run.onJokerAcquired(j);
     } else if (item.kind === 'consumable') {
       if (run.consumables.length >= run.consumableSlots) continue;
       const c = { ...item };
-      delete c.kind; delete c.price;
       run.consumables.push(c);
     } else {
       run.addCardToDeck(item);

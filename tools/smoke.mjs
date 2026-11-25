@@ -351,6 +351,34 @@ await shot('08-shop');
 s = await state();
 check('shop opened', s.screen === 'shop');
 
+// --- what a card is worth ---------------------------------------------------
+// Regression: the sell value used to be worked out from a price the card no
+// longer had, so every joker sold for $1 and the Egg never grew.
+await page.evaluate(() => {
+  const g = window.game;
+  const r = g.run;
+  r.createJoker('Egg');
+  r.runEndOfRoundJokers();
+  r.runEndOfRoundJokers();
+  g.showJokerDetail(r.jokers.find((j) => j.name === 'Egg'), true);
+});
+await page.waitForTimeout(220);
+const worth = await page.evaluate(() => {
+  const g = window.game;
+  const egg = g.run.jokers.find((j) => j.name === 'Egg');
+  return {
+    value: window.__shop.computeSellValue(g.run, egg),
+    button: g.buttons.map((b) => b.label).find((l) => l && l.includes('出售')) || '',
+    lines: g.detail ? g.detail.lines : [],
+  };
+});
+check('the egg grows every round', worth.value, 8);
+check('the sell button shows the grown price', worth.button, '出售 $8');
+check('the detail shows the current price',
+  worth.lines.some((l) => l.includes('$8')), true);
+await shot('08c-egg-worth');
+await page.evaluate(() => { window.game.detail = null; });
+
 await click(390, 209); // NEXT
 await page.waitForTimeout(300);
 s = await state();

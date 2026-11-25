@@ -121,17 +121,17 @@ export function cardName(card) {
 /**
  * What kind of item this is: 'playing', 'joker', 'consumable' or 'voucher'.
  *
- * Shop and pack entries carry an explicit `kind`, but the engine strips it
- * when the item joins the run, so the type also has to be derived from the
- * item's own fields.
+ * Shop and pack entries carry an explicit `kind`, and so do the cards the
+ * player owns. Anything else has to be worked out from the item's own
+ * fields: a consumable is recognisable by its type, a joker by its rarity.
  */
 export function cardKind(item) {
   if (!item) return null;
   if (item.kind) return item.kind;
-  if (item.rarity !== undefined || item.sellValue !== undefined) return 'joker';
   if (item.type === 'Tarot' || item.type === 'Planet' || item.type === 'Spectral') {
     return 'consumable';
   }
+  if (item.rarity !== undefined || item.sellBonus !== undefined) return 'joker';
   return null;
 }
 

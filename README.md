@@ -149,6 +149,15 @@ effect (debuffed suits, forced hands, card limits, face-down draws, and so on).
 **Tags** — 12 shop tags (Coupon, Double, D6, Gift, Jumbo, Hologram, Investment,
 Voucher, Boss, Anaglyph, Rocket, Uncommon).
 
+**Prices and sell values** — a card costs its price plus the price of its edition
+(Foil +$2, Holographic +$3, Polychrome +$5, Negative +$5), multiplied by the Clearance
+Sale (25% off) or Liquidation (50% off) discount and rounded half down. It sells for
+half of that and never for less than $1. The Egg and the Gift Card add to the sell
+value at the end of every round, on top of that, and a discount never takes their
+bonus away - which is what makes an Egg worth holding for a few rounds and then
+selling. The value on the card is the same number the shop pays you, so Temperance,
+Swashbuckler and the Ceremonial Dagger all read the same thing.
+
 ## Rendering
 
 The canvas is a **supersampled** surface: the logical game is still 428×240 pixels, but
@@ -188,6 +197,7 @@ src/
     jokers.js         joker behaviour
     consumables.js    tarots, spectrals, planets, vouchers
     shop.js           shop stock, pricing, buying and selling
+    value.js          the pricing rules: buy cost, sell value, editions
     blinds.js         ante tables, stakes, boss blinds
     tags.js           shop tags
     rng.js            seeded RNG

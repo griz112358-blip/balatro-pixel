@@ -2,6 +2,7 @@
 
 import { HANDS, HAND_BY_ID, HAND_BY_PLANET } from './hands.js';
 import { SUITS, RANK_LABEL, cloneCard, makeCard } from './cards.js';
+import { computeSellValue } from './value.js';
 
 export const TAROTS = {
   'The Fool': { cost: 3, desc: 'Creates the last Tarot or Planet card used during this run',
@@ -37,7 +38,7 @@ export const TAROTS = {
     } },
   'Temperance': { cost: 3, desc: 'Gives the total sell value of all current Jokers (Max of $50)',
     use: (s) => {
-      const v = Math.min(50, s.jokers.reduce((a, j) => a + j.sellValue, 0));
+      const v = Math.min(50, s.jokers.reduce((a, j) => a + computeSellValue(s, j), 0));
       s.money += v;
     } },
   'The Devil': { cost: 3, desc: 'Enhances 1 selected card into a Gold Card',
