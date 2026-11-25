@@ -922,5 +922,37 @@ check('plasma doubles', blindScore(1, 'white', 1, true), 600);
 // Balatro rounds shop prices half down: 8.5 becomes 8.
 check('prices round half down', [roundHalfDown(8.5), roundHalfDown(8.6), roundHalfDown(8.4)], [8, 9, 8]);
 
+// --- beating a blind ---
+// The blind is beaten as soon as the score of the round reaches what the blind
+// asks for, and running out of hands only kills the run when it did not.
+{
+  const run = new Run({ seed: 120 });
+  run.ante = 3;
+  run.selectBlind('big');
+  run.startBlind();
+  check('the ante 3 big blind needs 3000', run.currentBlind.scoreRequired, 3000);
+  check('the blind is not beaten yet', run.blindBeaten(), false);
+
+  run.roundScore = 13047;
+  run.currentBlind.score = run.roundScore;
+  check('a score over the requirement beats the blind', run.blindBeaten(), true);
+
+  // Running out of hands must not kill a run that already cleared the blind.
+  run.handsLeft = 0;
+  run.discardsLeft = 0;
+  check('a beaten blind is not a loss', run.isDead(), false);
+
+  // And a blind that was not beaten is a loss once the hands are gone.
+  const lost = new Run({ seed: 121 });
+  lost.ante = 3;
+  lost.selectBlind('big');
+  lost.startBlind();
+  lost.roundScore = 2999;
+  lost.handsLeft = 0;
+  lost.discardsLeft = 0;
+  check('a blind that fell short is a loss', lost.isDead(), true);
+  check('the lost blind was not beaten', lost.blindBeaten(), false);
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

@@ -89,6 +89,26 @@ function check(name, actual, expected = true) {
   check('the cards draw the suits', /drawSuit\(/.test(pixelSrc), true);
 }
 
+// ---------------------------------------------------------------------------
+// The end screen tells the truth about the blind that was lost
+// ---------------------------------------------------------------------------
+
+/**
+ * The game over screen used to print the score of the whole run right above
+ * the score the blind needed. The run score counts every blind before this
+ * one, so it is always bigger than the requirement: the screen read like the
+ * blind had been beaten after all. The score of the lost blind is the number
+ * that belongs there, and the run score stays on its own line.
+ */
+{
+  const fn = mainSrc.match(/gameOverInfo\(\)\s*\{([\s\S]*?)\n {2}\}/);
+  const body = fn ? fn[1] : '';
+  check('the end screen has the score of the blind', /run\.roundScore/.test(body), true);
+  check('the end screen has the requirement', /scoreRequired/.test(body), true);
+  check('the end screen keeps the run score apart',
+    /total:\s*formatNumber\(run\.score\)/.test(body), true);
+}
+
 for (const f of failures) console.log(`FAIL ${f}`);
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

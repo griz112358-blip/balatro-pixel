@@ -463,6 +463,33 @@ const final = await page.evaluate(() => ({
 console.log('final run state:', JSON.stringify(final));
 check('the run reached a conclusion', final.won || final.dead);
 
+// The end screen must show the score of the blind that was lost, not the
+// score of the whole run. The run score counts every blind before this one,
+// so next to the requirement it reads like the blind was beaten after all.
+const over = await page.evaluate(() => {
+  const g = window.game;
+  const r = g.run;
+  g.screen = 'gameover';
+  const fmt = (n) => (Math.abs(n) >= 1000 ? n.toLocaleString('en-US') : String(Math.round(n)));
+  return {
+    info: g.gameOverInfo(),
+    roundLabel: fmt(r.roundScore),
+    neededLabel: fmt(r.currentBlind ? r.currentBlind.scoreRequired : 0),
+    totalLabel: fmt(r.score),
+    roundScore: r.roundScore,
+    needed: r.currentBlind ? r.currentBlind.scoreRequired : 0,
+  };
+});
+check('the end screen shows the score of the blind that was lost',
+  over.info.score, over.roundLabel);
+check('the end screen shows what that blind needed',
+  over.info.needed, over.neededLabel);
+check('the end screen keeps the run score apart',
+  over.info.total, over.totalLabel);
+check('the lost blind did not reach its target',
+  over.roundScore < over.needed, true);
+await shot('09b-game-over');
+
 // --- localisation --------------------------------------------------------
 // The interface switches between Chinese and English at runtime, and the
 // render surface scales the pixel buffer by a whole multiple.

@@ -1460,17 +1460,41 @@ class Game {
 
   // ---- end screens -----------------------------------------------------
 
+  /**
+   * What the end screen tells the player about the run they just lost.
+   *
+   * The score of the blind that was lost is the number that matters here. The
+   * score of the whole run counts every blind before this one, so it is always
+   * bigger than the requirement - next to "needed" it looks like the blind was
+   * beaten after all.
+   */
+  gameOverInfo() {
+    const run = this.run;
+    return {
+      ante: run.ante,
+      blind: run.currentBlind
+        ? (cn() ? name(run.currentBlind.name, 'blind') : run.currentBlind.name.toUpperCase())
+        : '',
+      score: formatNumber(run.roundScore),
+      needed: formatNumber(run.currentBlind ? run.currentBlind.scoreRequired : 0),
+      total: formatNumber(run.score),
+    };
+  }
+
   drawGameOver(ctx) {
     const run = this.run;
+    const info = this.gameOverInfo();
     rect(ctx, 0, 0, W, H, PALETTE.bg);
     centerText(ctx, t('ui.gameOver'), W / 2, 56, PALETTE.red, cs(16, 18));
-    centerText(ctx, `${tf('ui.hudAnte', run.ante)}  ${run.currentBlind ? (cn() ? name(run.currentBlind.name, 'blind') : run.currentBlind.name.toUpperCase()) : ''}`,
+    centerText(ctx, `${tf('ui.hudAnte', info.ante)}  ${info.blind}`,
       W / 2, 88, PALETTE.cream, cs(8));
-    centerText(ctx, tf('ui.hudScore', formatNumber(run.score)), W / 2, 104, PALETTE.yellow, cs(7));
+    // What the player scored in the blind they lost, and what it needed.
+    centerText(ctx, tf('ui.blindResult', info.score, info.needed),
+      W / 2, 104, PALETTE.yellow, cs(7));
     centerText(ctx, tf('ui.hudRoundsHands', run.roundsPlayed, run.handsPlayed),
       W / 2, 120, PALETTE.grey, cs(7));
-    centerText(ctx, tf('ui.hudNeeded', formatNumber(run.currentBlind ? run.currentBlind.scoreRequired : 0)),
-      W / 2, 134, PALETTE.grey, cs(6));
+    // The score of the whole run, for the record.
+    centerText(ctx, tf('ui.scoreLine', info.total), W / 2, 134, PALETTE.grey, cs(6));
     this.buttons.push(new Button(W / 2 - 76, 156, 68, 20, t('ui.retry'), () => this.startRun(), {
       color: PALETTE.blue, border: PALETTE.lightBlue,
     }));
