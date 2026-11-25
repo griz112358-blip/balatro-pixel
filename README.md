@@ -6,6 +6,10 @@ booster packs, vouchers, boss blinds and shop runs, rendered on a 428×240 pixel
 Pure vanilla ES modules: no build step, no dependencies at runtime. Open `index.html`
 through a local server and play.
 
+**Play it online:** <https://griz112358-blip.github.io/balatro-pixel/> ·
+the full reference of every card and mechanic:
+<https://griz112358-blip.github.io/balatro-pixel/rules.html>
+
 ```bash
 npm start          # http://127.0.0.1:8770
 npm test           # unit tests + localisation tests + headless simulation
