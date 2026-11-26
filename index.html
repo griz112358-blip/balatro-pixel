@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0812">
+<meta name="description" content="BALATRO PIXEL — 小丑牌像素复刻">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>BALATRO PIXEL — 小丑牌像素复刻</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2312101c'/%3E%3Crect x='2' y='4' width='12' height='3' fill='%23f08a3c'/%3E%3Crect x='4' y='3' width='2' height='2' fill='%23f5c542'/%3E%3Crect x='10' y='3' width='2' height='2' fill='%23f5c542'/%3E%3Crect x='5' y='9' width='2' height='2' fill='%23f4f1e8'/%3E%3Crect x='9' y='9' width='2' height='2' fill='%23f4f1e8'/%3E%3C/svg%3E">
 <style>
   :root { color-scheme: dark; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body {
+  html {
+    height: 100%;
+    background: #0a0812;
+    /* The game owns the page: no scrolling, no rubber banding. */
+    overscroll-behavior: none;
+  }
+  body {
+    height: 100%;
     background: #0a0812;
     color: #f4f1e8;
     font-family: system-ui, -apple-system, 'PingFang SC', 'Hiragino Sans GB',
       'Microsoft YaHei', 'Noto Sans CJK SC', 'Helvetica Neue', Arial, sans-serif;
-    min-height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    gap: 8px;
+    /* Room for the notch on the left and right, and for the home indicator. */
+    padding:
+      calc(8px + env(safe-area-inset-top))
+      calc(8px + env(safe-area-inset-right))
+      calc(8px + env(safe-area-inset-bottom))
+      calc(8px + env(safe-area-inset-left));
+    /* A game should not scroll, zoom or select text under the finger. */
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
   #stage {
     position: relative;
@@ -29,13 +53,18 @@
   canvas {
     display: block;
     cursor: pointer;
+    touch-action: none;
+    /* Before the game measures the screen the canvas still carries its
+       logical size, which is wider than a phone. Clamping it keeps the page
+       from zooming out - a zoomed out page would throw the measurement off. */
+    max-width: 100%;
   }
   #hint {
-    margin-top: 10px;
     font-size: 11px;
     color: #6f6883;
     text-align: center;
-    line-height: 2;
+    line-height: 1.9;
+    max-width: 100%;
   }
   #hint kbd {
     background: #2a2440;
@@ -46,15 +75,38 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 10px;
   }
+  /* A phone holds the game as a wide strip. Turning the device sideways gives
+     it the room it needs, so say so - without blocking the game. */
+  #rotate {
+    display: none;
+    position: fixed;
+    left: 50%;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #1d1830;
+    border: 1px solid #4a4068;
+    color: #c9c2d8;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 2;
+  }
+  @media (pointer: coarse) and (orientation: portrait) and (max-width: 760px) {
+    #rotate { display: block; }
+  }
+  @media (max-height: 480px) {
+    #hint { display: none; }
+  }
 </style>
 </head>
 <body>
-  <div>
-    <div id="stage">
-      <canvas id="game" width="428" height="240"></canvas>
-    </div>
-    <div id="hint"></div>
+  <div id="stage">
+    <canvas id="game" width="428" height="240"></canvas>
   </div>
+  <div id="hint"></div>
+  <div id="rotate"></div>
   <script type="module" src="./src/ui/main.js"></script>
 </body>
 </html>

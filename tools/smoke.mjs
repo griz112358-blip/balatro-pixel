@@ -531,16 +531,25 @@ await page.evaluate(() => { window.game.scoreBreakdown = null; });
 
 // --- localisation --------------------------------------------------------
 // The interface switches between Chinese and English at runtime, and the
-// render surface scales the pixel buffer by a whole multiple.
+// render surface scales the pixel buffer by whatever fits the screen - which
+// may be a fraction, because a tablet should use all of its width.
 
 const surface = await page.evaluate(() => {
   const c = document.getElementById('game');
-  return { w: c.width, h: c.height, cssW: parseFloat(c.style.width), scale: window.game.scale };
+  return {
+    w: c.width,
+    h: c.height,
+    cssW: parseFloat(c.style.width),
+    cssH: parseFloat(c.style.height),
+    scale: window.game.scale,
+    dpr: Math.max(1, window.devicePixelRatio || 1),
+  };
 });
-check('the canvas is supersampled', surface.w === 428 * surface.scale, true);
-check('the canvas is square pixels', surface.h === 240 * surface.scale, true);
-check('the canvas is displayed 1:1', surface.cssW === 428 * surface.scale, true);
-check('the scale is a whole multiple', Number.isInteger(surface.scale), true);
+check('the canvas is supersampled', surface.w === Math.round(428 * surface.scale * surface.dpr), true);
+check('the canvas has square pixels', surface.h === Math.round(240 * surface.scale * surface.dpr), true);
+check('the canvas is displayed 1:1', surface.cssW === surface.w / surface.dpr, true);
+check('the canvas keeps its shape', Math.abs(surface.cssW / surface.cssH - 428 / 240) < 0.01, true);
+check('the scale is a usable size', surface.scale >= 0.35 && surface.scale <= 6, true);
 
 await page.evaluate(() => {
   const g = window.game;
@@ -618,6 +627,113 @@ await page.waitForTimeout(150);
   await rules.screenshot({ path: `${OUT}11-rules.png` });
   console.log('shot: 11-rules.png');
   await rules.close();
+}
+
+// --- responsive layout ----------------------------------------------------
+// The game has to fit the screen it is given: a desktop, a tablet in either
+// orientation and a phone in either orientation. It may never overflow, and
+// the page must never scroll sideways or zoom itself out.
+
+const VIEWPORTS = [
+  { name: 'desktop', width: 1440, height: 900 },
+  { name: 'ipad-portrait', width: 768, height: 1024 },
+  { name: 'ipad-landscape', width: 1024, height: 768 },
+  { name: 'phone-portrait', width: 390, height: 844 },
+  { name: 'phone-landscape', width: 844, height: 390 },
+];
+
+for (const vp of VIEWPORTS) {
+  await page.setViewportSize({ width: vp.width, height: vp.height });
+  await page.waitForTimeout(250);
+  const fit = await page.evaluate(() => {
+    const c = document.getElementById('game');
+    const r = c.getBoundingClientRect();
+    return {
+      left: r.left,
+      top: r.top,
+      right: r.right,
+      bottom: r.bottom,
+      ratio: r.width / r.height,
+      docW: document.documentElement.scrollWidth,
+      docH: document.documentElement.scrollHeight,
+      winW: window.innerWidth,
+      winH: window.innerHeight,
+      scale: window.game.scale,
+    };
+  });
+  check(`${vp.name}: the game fits on the screen`,
+    fit.left >= -0.5 && fit.top >= -0.5
+    && fit.right <= vp.width + 0.5 && fit.bottom <= vp.height + 0.5, true);
+  check(`${vp.name}: the page does not scroll sideways`, fit.docW <= fit.winW + 1, true);
+  check(`${vp.name}: the page does not scroll up and down`, fit.docH <= fit.winH + 1, true);
+  check(`${vp.name}: the game keeps its shape`, Math.abs(fit.ratio - 428 / 240) < 0.02, true);
+  check(`${vp.name}: the game uses the screen`, fit.scale > 0.35, true);
+}
+
+// The phone in portrait is too narrow for a wide game, so the page asks for
+// the device to turn. That only applies to a touch screen, so it is checked
+// in the touch browser further down.
+
+await page.setViewportSize({ width: 1400, height: 900 });
+await page.waitForTimeout(250);
+check('the game goes back to the desktop', await page.evaluate(() => window.game.scale > 1), true);
+
+// --- the touch path --------------------------------------------------------
+// A finger has no hover, so a tap opens the card instead of a tooltip, and a
+// finger that slides across the screen must not pick anything.
+
+{
+  const mob = await browser.newContext({
+    viewport: { width: 844, height: 390 },
+    hasTouch: true,
+    isMobile: true,
+    deviceScaleFactor: 3,
+  });
+  const m = await mob.newPage();
+  m.on('console', (e) => { if (e.type() === 'error') errors.push(`touch console.error: ${e.text()}`); });
+  m.on('pageerror', (e) => errors.push(`touch pageerror: ${e.message}`));
+  await m.goto(BASE, { waitUntil: 'networkidle' });
+  await m.waitForTimeout(400);
+
+  // A phone held upright is too narrow for a wide game, so it is asked to
+  // turn; once it is sideways the hint goes away again.
+  await m.setViewportSize({ width: 390, height: 844 });
+  await m.waitForTimeout(350);
+  check('the phone is asked to turn sideways', await m.locator('#rotate').isVisible(), true);
+  check('the hint about turning is written',
+    (await m.locator('#rotate').innerText()).length > 0, true);
+
+  await m.setViewportSize({ width: 844, height: 390 });
+  await m.waitForTimeout(350);
+  check('the phone plays in landscape without the hint',
+    await m.locator('#rotate').isVisible(), false);
+  check('the phone gets touch hints',
+    (await m.locator('#hint').innerText()).length > 0, true);
+  check('the phone has no keyboard hints',
+    (await m.locator('#hint kbd').count()), 0);
+
+  // A tap on the deck arrow changes the deck.
+  const arrow = await m.evaluate(() => {
+    const b = window.game.buttons.find((x) => x.label === '>');
+    const r = document.getElementById('game').getBoundingClientRect();
+    return { x: r.left + (b.x + b.w / 2) * (r.width / 428), y: r.top + (b.y + b.h / 2) * (r.height / 240) };
+  });
+  const deckBefore = await m.evaluate(() => window.game.deckIndex);
+  await m.touchscreen.tap(arrow.x, arrow.y);
+  await m.waitForTimeout(150);
+  const deckAfter = await m.evaluate(() => window.game.deckIndex);
+  check('a finger can press a button', deckAfter !== deckBefore, true);
+
+  // A finger that slides away does not press anything.
+  const deckNow = await m.evaluate(() => window.game.deckIndex);
+  await m.touchscreen.tap(arrow.x + 60, arrow.y);
+  await m.waitForTimeout(150);
+  check('a tap away from the button does nothing',
+    await m.evaluate(() => window.game.deckIndex), deckNow);
+
+  await m.screenshot({ path: `${OUT}12-phone.png` });
+  console.log('shot: 12-phone.png');
+  await mob.close();
 }
 
 console.log('\n=== errors ===');

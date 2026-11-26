@@ -34,6 +34,9 @@ html, body {
   font-family: var(--font);
   font-size: 14px;
   line-height: 1.55;
+  /* iOS would otherwise blow the text up on rotation. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 a { color: var(--light-blue); text-decoration: none; }
@@ -276,3 +279,126 @@ td.num { color: var(--yellow); }
 }
 
 .hidden { display: none !important; }
+
+/* ---------- responsive ----------
+   The rules page is a document, so it scrolls - but it has to read well on a
+   phone, sit clear of the notch and the home indicator, and never squeeze the
+   cards into one unreadable column. */
+
+body {
+  /* Room for the home indicator on a phone. */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.top {
+  padding-left: calc(20px + env(safe-area-inset-left));
+  padding-right: calc(20px + env(safe-area-inset-right));
+  padding-top: calc(12px + env(safe-area-inset-top));
+}
+
+nav {
+  padding-left: calc(20px + env(safe-area-inset-left));
+  padding-right: calc(20px + env(safe-area-inset-right));
+}
+
+main {
+  padding-left: calc(20px + env(safe-area-inset-left));
+  padding-right: calc(20px + env(safe-area-inset-right));
+}
+
+#empty {
+  padding-left: calc(20px + env(safe-area-inset-left));
+  padding-right: calc(20px + env(safe-area-inset-right));
+}
+
+/* A tablet has room for two columns of cards; a phone has one. */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  html, body { font-size: 15px; }
+
+  .top {
+    gap: 10px;
+    padding: 10px calc(14px + env(safe-area-inset-right))
+             10px calc(14px + env(safe-area-inset-left));
+  }
+  .brand h1 { font-size: 17px; letter-spacing: 2px; }
+  .brand p { font-size: 11px; }
+
+  /* The search field takes the whole width, the buttons sit under it. */
+  .tools {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  #search {
+    flex: 1 1 160px;
+    width: auto;
+    min-width: 0;
+    /* A comfortable tap target on a phone. */
+    padding: 10px 12px;
+    font-size: 16px; /* 16px keeps iOS from zooming when the field is used */
+  }
+  #lang, #back {
+    padding: 10px 14px;
+    font-size: 14px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Fourteen section links would eat the whole screen if they wrapped, so
+     they scroll sideways in one line instead. */
+  nav {
+    position: static;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px calc(14px + env(safe-area-inset-right))
+             8px calc(14px + env(safe-area-inset-left));
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+
+  main {
+    padding: 16px calc(14px + env(safe-area-inset-right))
+             60px calc(14px + env(safe-area-inset-left));
+  }
+
+  section { margin-bottom: 26px; scroll-margin-top: 16px; }
+  section > h2 { font-size: 17px; }
+
+  .grid { grid-template-columns: 1fr; gap: 8px; }
+  .entry { padding: 10px; }
+  .entry .name { font-size: 15px; }
+  .entry .effect { font-size: 14px; }
+
+  .overview p { padding: 10px 12px; font-size: 15px; }
+  .overview p.formula { font-size: 16px; }
+
+  /* The tables have three or four short columns, so they fit - they only
+     need smaller cells and a little more line height. */
+  table { font-size: 13px; }
+  th, td { padding: 7px 6px; }
+  th { font-size: 11px; }
+
+  .suits { gap: 4px 14px; }
+}
+
+/* A phone in landscape is short: the sticky header would eat the page. */
+@media (max-height: 460px) and (orientation: landscape) {
+  .top {
+    padding-top: calc(8px + env(safe-area-inset-top));
+    padding-bottom: 8px;
+  }
+  .brand p { display: none; }
+}

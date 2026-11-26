@@ -82,19 +82,24 @@ export function makeCanvas() {
 /**
  * Turn a canvas into the render surface.
  *
- * @param ss  device pixels per logical pixel
+ * The backing store holds `scale` device pixels for every logical pixel and
+ * the element is displayed at exactly that size, so the browser never
+ * resamples the picture: the game is drawn 1:1 with the screen. The scale may
+ * be a fraction, which is what lets a tablet or a phone use the whole screen.
+ *
+ * @param scale device pixels per logical pixel (may be fractional)
  * @param dpr device pixel ratio of the display
  */
-export function setupSurface(canvas, ss = SCALE, dpr = 1) {
-  SS = Math.max(1, Math.round(ss));
+export function setupSurface(canvas, scale = SCALE, dpr = 1) {
+  SS = Math.max(0.1, scale);
   DPR = Math.max(1, dpr || 1);
-  canvas.width = W * SS * DPR;
-  canvas.height = H * SS * DPR;
-  canvas.style.width = `${W * SS}px`;
-  canvas.style.height = `${H * SS}px`;
+  canvas.width = Math.max(1, Math.round(W * SS * DPR));
+  canvas.height = Math.max(1, Math.round(H * SS * DPR));
+  canvas.style.width = `${canvas.width / DPR}px`;
+  canvas.style.height = `${canvas.height / DPR}px`;
   const ctx = canvas.getContext('2d');
   // Every drawing call works in logical 428x240 coordinates.
-  ctx.setTransform(SS * DPR, 0, 0, SS * DPR, 0, 0);
+  ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
   ctx.textBaseline = 'top';
   return ctx;
 }

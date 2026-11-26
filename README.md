@@ -166,9 +166,9 @@ Swashbuckler and the Ceremonial Dagger all read the same thing.
 ## Rendering
 
 The canvas is a **supersampled** surface: the logical game is still 428×240 pixels, but
-the backing store holds `SS × DPR` device pixels for every logical pixel, so the artwork
-is drawn 1:1 with the screen and every pixel block is square. `SS` is the largest whole
-multiple that fits the window (`+` / `-` override it).
+the backing store holds `scale × DPR` device pixels for every logical pixel, so the artwork
+is drawn 1:1 with the screen and every pixel block is square. `scale` is whatever fits the
+window, and it may be a fraction (`+` / `-` override it).
 
 Text is drawn straight onto that surface with the platform font, so Chinese and Latin
 sit on the same line with the same weight - no bitmap face, no nearest-neighbour
@@ -188,6 +188,33 @@ as inline SVG on the rules page. The font glyphs are gone: they look blobby at s
 sizes and every platform draws them differently. A playing card has rounded corners,
 the rank and a small suit sit in the top left corner and the big suit fills the
 middle of the card, the way a real card is printed.
+
+## Fitting the screen
+
+The game runs on a desktop, on a tablet and on a phone, so the surface follows the
+screen instead of assuming a fixed size.
+
+- **The scale may be a fraction.** A whole multiple would leave most of a tablet
+  empty, so the surface takes whatever scale fits and the backing store is sized to
+  match exactly. The browser never resamples the picture, so the pixels stay square.
+- **The page owns the screen.** No scrolling, no rubber banding, no text selection
+  and no double-tap zoom under a finger. The canvas is clamped to the width of the
+  page, so the browser cannot zoom the page out and throw the measurement off.
+- **The notch is respected.** `viewport-fit=cover` plus `env(safe-area-inset-*)`
+  keeps the game clear of the camera cutout and the home indicator.
+- **The visible part is measured.** `window.visualViewport` is used when the browser
+  has one, because the window can claim more room than the screen really shows.
+- **One set of handlers.** Pointer events cover the mouse, a pen and a finger. A
+  finger has no hover, so a tap opens the joker card instead of a tooltip, and a
+  finger that slides more than three pixels does not press anything.
+- **A phone is asked to turn.** The game is wide, so a phone held upright gets a
+  pill at the bottom that says sideways is better. It disappears in landscape.
+- **The rules page is a document.** It scrolls, it keeps clear of the safe area,
+  its section index scrolls sideways in one line on a phone and the card grid drops
+  from three columns to one.
+
+`node tools/fitpeek.mjs` opens the game and the rules page on all of those sizes and
+writes the screenshots to `shots/fit/`.
 
 ## Layout
 
@@ -231,6 +258,7 @@ tools/
   scorepeek.mjs       screenshots of the score breakdown
   rulespeek.mjs       screenshots of the rules page, in both languages
   cardstates.mjs      one card per state (stone, wild, seal, edition, ...)
+  fitpeek.mjs         screenshots of the game and the rules page on phone and tablet
   parse.py scrape.py  the wiki scraper that builds src/data
 ```
 
@@ -256,7 +284,11 @@ tools/
 
 `npm run test:smoke` drives the real UI in a browser (needs `npm install` first; it
 uses the installed Google Chrome when Playwright's own Chromium is not downloaded) and
-writes screenshots to `shots/`. `npm run shots` captures every screen.
+writes screenshots to `shots/`. It also checks the layout on a desktop, a tablet and a
+phone in both orientations: the game has to fit the screen, the page must never scroll
+sideways, the surface has to keep the shape of the game and a finger has to be able to
+press a button without a slide picking the wrong one. `npm run shots` captures every
+screen.
 
 ## Localisation
 

@@ -50,6 +50,33 @@ function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 function cn() { return getLang() === 'zh'; }
 function cs(size, min = 0) { return cn() ? Math.max(size, min, CJK_MIN) : size; }
 
+/**
+ * How much room the screen keeps for the notch and the home indicator.
+ *
+ * The safe area is a CSS thing, so it has to be measured with a probe: a div
+ * with the env() paddings. The probe is built once and kept out of the way,
+ * because a resize can fire many times in a row.
+ */
+let insetProbe = null;
+
+function safeAreaInsets() {
+  if (!insetProbe) {
+    insetProbe = document.createElement('div');
+    insetProbe.style.cssText = 'position:fixed;top:0;left:0;width:0;height:0;visibility:hidden;'
+      + 'pointer-events:none;'
+      + 'padding-top:env(safe-area-inset-top);padding-right:env(safe-area-inset-right);'
+      + 'padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);';
+    document.body.appendChild(insetProbe);
+  }
+  const style = getComputedStyle(insetProbe);
+  return {
+    top: parseFloat(style.paddingTop) || 0,
+    right: parseFloat(style.paddingRight) || 0,
+    bottom: parseFloat(style.paddingBottom) || 0,
+    left: parseFloat(style.paddingLeft) || 0,
+  };
+}
+
 function centerText(ctx, str, cx, y, color = PALETTE.white, size = 8) {
   text(ctx, str, Math.round(cx), y, color, size, 'center');
 }
@@ -143,11 +170,22 @@ class Game {
     this.hover = null;
     this.manualScale = 0;    // 0 = fit the window automatically
     this.scale = SCALE;
+    this.tap = null;         // a finger waiting to lift
+    // A phone plays with a finger, so it gets the touch hints and no hover.
+    this.touch = window.matchMedia
+      && window.matchMedia('(pointer: coarse)').matches;
 
     this.bindEvents();
     this.renderHint();
     this.resize();
     window.addEventListener('resize', () => this.resize());
+    // The visible part of the page can change without the window changing -
+    // a tablet browser slides its bars in and out. Then the visible viewport
+    // is the one to measure.
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => this.resize());
+    }
+    window.addEventListener('orientationchange', () => this.resize());
     this.loop = this.loop.bind(this);
     requestAnimationFrame(this.loop);
   }
@@ -155,19 +193,28 @@ class Game {
   /**
    * Resize the render surface.
    *
-   * The canvas is a supersampled buffer: its backing store holds SS*DPR
-   * device pixels for every logical pixel, so the game is drawn 1:1 with the
-   * screen and every pixel block is square. SS is the largest whole multiple
-   * that still fits the window, which keeps the artwork crisp and makes the
-   * Chinese text legible.
-   * Press '+' / '-' to step through the multiples and '0' to go back to the
-   * automatic fit.
+   * The canvas fills whatever room the screen leaves, at any size: a desktop
+   * gets a big multiple, a tablet fills the width, a phone in landscape gets
+   * a strip that fits. The scale may be a fraction, because a whole multiple
+   * would waste most of a tablet screen.
+   * Press '+' / '-' to zoom and '0' to go back to the automatic fit.
    */
   /** The key hints under the canvas, in the current language. */
   renderHint() {
     const hint = document.getElementById('hint');
     if (!hint) return;
+    const rotate = document.getElementById('rotate');
+    if (rotate) rotate.textContent = t('ui.rotate');
     const kbd = (k) => `<kbd>${k}</kbd>`;
+    // A phone has no keyboard, so it gets the touch hints instead.
+    if (this.touch) {
+      hint.innerHTML = [
+        t('ui.hint.tapSelect'),
+        t('ui.hint.tapButtons'),
+        t('ui.hint.tapRead'),
+      ].join(' &nbsp;·&nbsp; ');
+      return;
+    }
     hint.innerHTML = [
       `${kbd(t('ui.hint.mouse'))} ${t('ui.hint.select')}`,
       `${kbd('1')} ${t('ui.hint.discard')}`,
@@ -183,13 +230,19 @@ class Game {
 
   resize() {
     const hint = document.getElementById('hint');
-    const reserve = hint ? hint.offsetHeight + 34 : 48;
-    const fit = Math.min(
-      (window.innerWidth - 16) / W,
-      (window.innerHeight - reserve) / H,
-    );
-    let ss = this.manualScale || Math.floor(fit);
-    ss = clamp(ss, 1, 6);
+    const insets = safeAreaInsets();
+    // The body padding sits around the canvas and the key hints under it.
+    const reserve = (hint ? hint.offsetHeight + 16 : 24) + insets.top + insets.bottom;
+    // The visual viewport is the part of the screen that is really visible.
+    // The window size is not enough: a page that is wider than the screen is
+    // zoomed out by the browser, and then the window claims more room than
+    // there is.
+    const view = window.visualViewport;
+    const availW = (view ? view.width : window.innerWidth) - 16 - insets.left - insets.right;
+    const availH = (view ? view.height : window.innerHeight) - reserve;
+    const fit = Math.min(availW / W, availH / H);
+    let ss = this.manualScale || fit;
+    ss = clamp(ss, 0.35, 6);
     this.scale = ss;
     this.ctx = setupSurface(this.canvas, ss, window.devicePixelRatio || 1);
   }
@@ -207,20 +260,40 @@ class Game {
         y: Math.round((ev.clientY - r.top) * (H / r.height)),
       };
     };
-    c.addEventListener('mousemove', (ev) => {
+    // Pointer events cover the mouse, a pen and a finger with one set of
+    // handlers, so the game works the same on a phone.
+    c.addEventListener('pointermove', (ev) => {
+      // A finger has no hover: the description opens as a card instead.
+      if (ev.pointerType === 'touch') return;
       const p = toPixel(ev);
       this.mouse.x = p.x; this.mouse.y = p.y;
     });
-    c.addEventListener('mouseleave', () => {
+    c.addEventListener('pointerleave', () => {
       this.mouse.x = -1; this.mouse.y = -1;
     });
-    c.addEventListener('mousedown', (ev) => {
+    c.addEventListener('pointerdown', (ev) => {
       const p = toPixel(ev);
       this.mouse.down = true;
       unlockAudio();
+      if (ev.pointerType === 'touch') {
+        // A finger covers the card it touches, so the click waits until the
+        // finger lifts again - a slip then cannot pick the wrong card.
+        this.tap = { x: p.x, y: p.y, id: ev.pointerId };
+        try { c.setPointerCapture(ev.pointerId); } catch { /* not supported */ }
+        return;
+      }
       this.onClick(p.x, p.y);
     });
-    c.addEventListener('mouseup', () => { this.mouse.down = false; });
+    c.addEventListener('pointerup', (ev) => {
+      this.mouse.down = false;
+      if (!this.tap || this.tap.id !== ev.pointerId) return;
+      const p = toPixel(ev);
+      const tap = this.tap;
+      this.tap = null;
+      // Only a tap that stayed on the same spot counts.
+      if (Math.abs(p.x - tap.x) <= 3 && Math.abs(p.y - tap.y) <= 3) this.onClick(p.x, p.y);
+    });
+    c.addEventListener('pointercancel', () => { this.mouse.down = false; this.tap = null; });
     c.addEventListener('contextmenu', (ev) => ev.preventDefault());
     window.addEventListener('keydown', (ev) => {
       unlockAudio();
@@ -271,6 +344,7 @@ class Game {
     if (k === 'l') {
       const lang = toggleLang();
       this.renderHint();
+      this.resize();
       this.showToast(lang === 'zh' ? t('ui.languageChinese') : t('ui.languageEnglish'));
       ev.preventDefault();
       return;
@@ -278,9 +352,9 @@ class Game {
     if (k === '+' || k === '=' || k === '-' || k === '0') {
       if (k === '0') this.manualScale = 0;
       else {
-        const step = k === '+' || k === '=' ? 1 : -1;
+        const step = k === '+' || k === '=' ? 0.25 : -0.25;
         const cur = this.manualScale || this.scale;
-        this.manualScale = Math.max(1, Math.min(6, cur + step));
+        this.manualScale = clamp(Math.round((cur + step) * 100) / 100, 0.35, 6);
       }
       this.resize();
       ev.preventDefault();
@@ -671,6 +745,7 @@ class Game {
     this.buttons.push(new Button(W - 66, 4, 60, 14, cn() ? '中文' : 'EN', () => {
       const lang = toggleLang();
       this.renderHint();
+      this.resize();
       this.showToast(lang === 'zh' ? t('ui.languageChinese') : t('ui.languageEnglish'));
     }, { color: PALETTE.panel, border: PALETTE.panelLight, size: cs(6, 8) }));
 

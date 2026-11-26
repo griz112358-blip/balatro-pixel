@@ -7,7 +7,8 @@
 //   node test/pixel.test.mjs
 
 import {
-  hasCJK, wrapName, wrapText, measure, fitText, chunk, enhLabel, formatJokerValue, W, H,
+  hasCJK, wrapName, wrapText, measure, fitText, chunk, enhLabel, formatJokerValue, setupSurface,
+  W, H,
 } from '../src/ui/pixel.js';
 import { setLang } from '../src/ui/i18n.js';
 import { SUIT_SHAPES, suitShape, suitSvg, pathData, drawSuit } from '../src/ui/suits.js';
@@ -154,6 +155,47 @@ setLang('zh');
   check('an x mult value reads X1.5', formatJokerValue({ kind: 'xmult', value: 1.5 }), 'X1.5');
   check('an x mult keeps its decimals', formatJokerValue({ kind: 'xmult', value: 2.25 }), 'X2.25');
   check('a joker with no value shows nothing', formatJokerValue(null), '');
+}
+
+// ---------------------------------------------------------------------------
+// The render surface
+// ---------------------------------------------------------------------------
+
+/**
+ * The surface may be scaled by a fraction, because a tablet should use all of
+ * its width instead of the largest whole multiple. The backing store then
+ * holds scale*DPR device pixels per logical pixel and the element is shown at
+ * exactly that size, so the browser never resamples the picture and the
+ * pixels stay square.
+ */
+{
+  const canvas = {
+    width: 0,
+    height: 0,
+    style: {},
+    getContext() {
+      return {
+        setTransform: (...a) => { canvas.transform = a; },
+        textBaseline: '',
+      };
+    },
+  };
+  setupSurface(canvas, 1.75, 2);
+  check('the backing store follows the scale', canvas.width, 428 * 1.75 * 2);
+  check('the backing store keeps the shape', canvas.height, 240 * 1.75 * 2);
+  check('the element is shown one to one', canvas.style.width, `${428 * 1.75}px`);
+  check('the element keeps its shape', canvas.style.height, `${240 * 1.75}px`);
+  check('the drawing scale matches the buffer',
+    [canvas.transform[0], canvas.transform[3]], [428 * 1.75 * 2 / 428, 240 * 1.75 * 2 / 240]);
+
+  // A phone in portrait ends up with a scale below one.
+  setupSurface(canvas, 0.87, 3);
+  check('a small scale still fills the buffer', canvas.width, Math.round(428 * 0.87 * 3));
+  check('a small scale is shown small', canvas.style.width, `${canvas.width / 3}px`);
+
+  // A scale of zero would make an empty canvas.
+  setupSurface(canvas, 0, 1);
+  check('a broken scale still leaves a surface', canvas.width > 0 && canvas.height > 0, true);
 }
 
 for (const f of failures) console.log(`FAIL ${f}`);

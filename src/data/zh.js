@@ -953,6 +953,10 @@ export const ZH = {
   "ui.handLevels": "牌型等级",
   "ui.escClose": "Esc 关闭",
   "ui.hint.hands": "牌型等级",
+  "ui.hint.tapSelect": "点牌选择",
+  "ui.hint.tapButtons": "点按钮出牌 / 弃牌",
+  "ui.hint.tapRead": "点小丑牌看说明",
+  "ui.rotate": "横屏游玩体验更好",
 
   // ------------------------------------------------------------- rules page
   'rules.title': '规则与图鉴',

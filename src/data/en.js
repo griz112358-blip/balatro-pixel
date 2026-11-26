@@ -133,6 +133,10 @@ export const EN = {
   'ui.handLevels': 'Hand levels',
   'ui.escClose': 'Esc to close',
   'ui.hint.hands': 'hand levels',
+  'ui.hint.tapSelect': 'Tap cards to select',
+  'ui.hint.tapButtons': 'Tap the buttons to play',
+  'ui.hint.tapRead': 'Tap a joker to read it',
+  'ui.rotate': 'Turn the device sideways for a better view',
 
   // ------------------------------------------------------------------- HUD
   'ui.hudAnte': 'ANTE %d',
