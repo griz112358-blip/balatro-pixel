@@ -16,7 +16,7 @@
 import {
   W, H, SCALE, PALETTE, makeCanvas, setupSurface, rect, frame, panel, roundRect, text, wrapText,
   drawCard, drawJokerCard, formatNumber, CARD_W, CARD_H, JOKER_W, JOKER_H,
-  wrapName, chunk, hasCJK, displayName, cardKind, measure, fitText, CJK_MIN,
+  wrapName, chunk, hasCJK, displayName, cardKind, measure, fitText, CJK_MIN, formatJokerValue,
 } from './pixel.js';
 import { Run, DECKS } from '../engine/run.js';
 import { STAKES } from '../engine/blinds.js';
@@ -26,7 +26,7 @@ import {
   rerollShop, computeBuyCost, computeSellValue, openPack, closeShop,
 } from '../engine/shop.js';
 import { TARGET_TAROTS, TARGET_SPECTRALS, PLANETS } from '../engine/consumables.js';
-import { jokerTarget } from '../engine/jokers.js';
+import { jokerTarget, jokerValue } from '../engine/jokers.js';
 import { JOKER_DATA } from '../data/jokers.js';
 import { jokerDescription } from '../data/descriptions.js';
 import { TAGS } from '../engine/tags.js';
@@ -576,8 +576,11 @@ class Game {
       ? this.run.jokers.includes(tip.item)
       : this.run.consumables.includes(tip.item);
     const valueText = owned ? tf('ui.sellValue', computeSellValue(this.run, tip.item)) : '';
+    // What a joker that grows is worth right now.
+    const grown = cardKind(tip.item) === 'joker' ? jokerValue(this.run, tip.item) : null;
+    const grownText = grown ? tf('ui.jokerValue', formatJokerValue(grown)) : '';
     const th = 9 + titleSize + 4 + lines.length * (size + 1)
-      + (targetText ? size + 4 : 0) + (valueText ? size + 4 : 0) + 5;
+      + (targetText ? size + 4 : 0) + (grownText ? size + 4 : 0) + (valueText ? size + 4 : 0) + 5;
 
     // Next to the card: to the right for the left column, to the left for
     // the right column.
@@ -598,6 +601,10 @@ class Game {
     let ry = ty + 8 + titleSize + 4 + lines.length * (size + 1);
     if (targetText) {
       text(ctx, targetText, tx + 8, ry + 3, PALETTE.pink, size);
+      ry += size + 4;
+    }
+    if (grownText) {
+      text(ctx, grownText, tx + 8, ry + 3, PALETTE.lightGreen, size);
       ry += size + 4;
     }
     if (valueText) {
@@ -932,7 +939,7 @@ class Game {
     run.jokers.forEach((j, i) => {
       const x = 5 + (i % 2) * 34;
       const y = 36 + Math.floor(i / 2) * 42;
-      drawJokerCard(ctx, j, x, y, {});
+      drawJokerCard(ctx, j, x, y, { value: jokerValue(run, j) });
       this.hoverTargets.push({ item: j, x, y, w: JOKER_W, h: JOKER_H });
       if (this.mouseOver(x, y, JOKER_W, JOKER_H)) {
         frame(ctx, x - 1, y - 1, JOKER_W + 2, JOKER_H + 2, PALETTE.yellow, 1);
@@ -1223,7 +1230,7 @@ class Game {
     text(ctx, t('ui.yourJokers'), 8, 140, PALETTE.grey, cs(6));
     run.jokers.forEach((j, i) => {
       const x = 8 + i * 34;
-      drawJokerCard(ctx, j, x, 150, {});
+      drawJokerCard(ctx, j, x, 150, { value: jokerValue(run, j) });
       this.hoverTargets.push({ item: j, x, y: 150, w: JOKER_W, h: JOKER_H });
       if (this.mouseOver(x, 150, JOKER_W, JOKER_H)) {
         frame(ctx, x - 1, 149, JOKER_W + 2, JOKER_H + 2, PALETTE.yellow, 1);
@@ -1269,7 +1276,7 @@ class Game {
       drawCard(ctx, item, x, y, {});
       text(ctx, `$${cost}`, x + 2, y + CARD_H + 2, PALETTE.yellow, 6);
     } else {
-      drawJokerCard(ctx, item, x, y, {});
+      drawJokerCard(ctx, item, x, y, { value: jokerValue(run, item) });
       text(ctx, `$${cost}`, x + 2, y + JOKER_H + 2, PALETTE.yellow, 6);
       this.hoverTargets.push({ item, x, y, w: JOKER_W, h: JOKER_H });
       if (this.mouseOver(x, y, JOKER_W, JOKER_H)) {
@@ -1316,7 +1323,7 @@ class Game {
           this.togglePack(item);
         }, { ghost: true }));
       } else {
-        drawJokerCard(ctx, item, x, 58, { selected });
+        drawJokerCard(ctx, item, x, 58, { selected, value: jokerValue(run, item) });
         boxes.push({ item, x, y: 54, w: JOKER_W, h: JOKER_H });
         this.buttons.push(new Button(x, 54, JOKER_W, JOKER_H, '', () => {
           this.togglePack(item);
@@ -1392,6 +1399,9 @@ class Game {
     if (joker.eternal) lines.push(t('ui.eternal'));
     if (joker.perishable) lines.push(t('ui.perishable'));
     if (joker.rental) lines.push(t('ui.rental'));
+    // What the joker is worth right now, for the ones that grow.
+    const grown = jokerValue(this.run, joker);
+    if (grown) lines.push(tf('ui.jokerValue', formatJokerValue(grown)));
     // What the card is worth right now. The Egg and the Gift Card push it up.
     if (sellable) lines.push(tf('ui.sellValue', computeSellValue(this.run, joker)));
     // The target a joker aims at this round.

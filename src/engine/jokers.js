@@ -118,6 +118,57 @@ export function jokerTarget(joker) {
   }
 }
 
+/**
+ * What a joker is worth right now.
+ *
+ * Some jokers grow over the run: the Green Joker gains mult with every hand
+ * played, the Runner doubles its multiplier, the Ice Cream loses chips with
+ * every hand. The card shows this number, so it has to be worked out the same
+ * way the joker's effect is.
+ *
+ *   { kind: 'chips', value: 85 }
+ *   { kind: 'mult', value: 12 }
+ *   { kind: 'xmult', value: 1.5 }
+ *
+ * A joker that does not grow has no value to show.
+ */
+export function jokerValue(state, joker) {
+  if (!joker) return null;
+  switch (joker.name) {
+    case 'Ice Cream':
+      return { kind: 'chips', value: joker.chips ?? 100 };
+    case 'Green Joker':
+      return { kind: 'mult', value: Math.max(0, (joker.hands || 0) - (joker.discards || 0)) };
+    case 'Popcorn':
+      return { kind: 'mult', value: joker.mult ?? 20 };
+    case 'Ride the Bus':
+      return { kind: 'mult', value: joker.mult || 0 };
+    case 'Bull':
+      return { kind: 'chips', value: 2 * Math.max(0, state.money) };
+    case 'Joker Stencil':
+      return { kind: 'xmult', value: Math.max(1, state.jokerSlots - state.jokers.length + 1) };
+    case 'Runner':
+    case 'Castle':
+      return { kind: 'chips', value: joker.chips || 0 };
+    case 'Spare Trousers':
+    case 'Juggler':
+    case 'Ceremonial Dagger':
+      return { kind: 'mult', value: joker.extraMult || 0 };
+    case 'Yorick':
+    case 'Canio':
+    case 'Glass Joker':
+    case 'Hologram':
+    case 'Constellation':
+    case 'Lucky Cat':
+    case 'Campfire':
+    case 'Hit the Road':
+    case 'Obelisk':
+      return { kind: 'xmult', value: joker.xMult || 1 };
+    default:
+      return null;
+  }
+}
+
 export const JOKERS = {
   // ---------------- Common: additive mult ----------------
   Joker: {
@@ -218,24 +269,28 @@ export const JOKERS = {
   },
   'Green Joker': {
     activation: 'independent',
-    fn: (s, ctx) => {
+    fn: (s, ctx, j) => {
       // "+1 mult per hand played, -1 mult per card discarded". It starts at
       // +0 and never goes below it, so discards can only hold it back, never
       // subtract from the score. Both numbers are reported so the breakdown
       // can say which of the two is which.
-      const hands = s.handsPlayed;
-      const discards = s.discardsUsed;
+      const hands = j.hands || 0;
+      const discards = j.discards || 0;
       ctx.mult += Math.max(0, hands - discards);
       ctx.note = { id: 'greenJoker', args: [hands, discards] };
     },
   },
   'Popcorn': {
     activation: 'independent',
-    fn: (s, ctx) => { ctx.mult += 20 - 4 * s.roundsPlayed; },
+    fn: (s, ctx, j) => { ctx.mult += j.mult ?? 20; },
   },
   'Ice Cream': {
     activation: 'independent',
-    fn: (s, ctx) => { ctx.chips += 100 - 5 * s.handsPlayed; },
+    fn: (s, ctx, j) => {
+      // Starts at 100 chips and loses 5 with every hand played. It never goes
+      // below 0, and the first hand still gets the full 100.
+      ctx.chips += j.chips ?? 100;
+    },
   },
   'Misprint': {
     activation: 'independent',
@@ -243,7 +298,7 @@ export const JOKERS = {
   },
   'Ride the Bus': {
     activation: 'independent',
-    fn: (s, ctx) => { ctx.mult += s.rideTheBus; },
+    fn: (s, ctx, j) => { ctx.mult += j.mult || 0; },
   },
   'Runner': {
     activation: 'independent',

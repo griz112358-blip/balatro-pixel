@@ -113,6 +113,11 @@ Splash, Four Fingers, Shortcut, Merry Andy, Astronomer, Smeared Joker) and shop
 abilities (Ceremonial Dagger, Chicot, Luchador, Perkeo, Invisible Joker, Diet Cola,
 Credit Card, Mr. Bones).
 
+**Jokers that grow** — the card shows what it is worth right now, the way Balatro does:
+the Ice Cream's chips, the Green Joker's mult, the Popcorn's mult, the Runner's chips
+and the X multipliers of the scaling jokers. Each joker keeps its own number, so one
+picked up half way through a run starts from zero instead of counting the whole run.
+
 Jokers that read the cards **held in hand** follow the wiki order: played cards leave
 the hand and do not count, the cards left in hand are walked from left to right, and
 each card triggers the ability that belongs to it. So Raised Fist doubles the lowest

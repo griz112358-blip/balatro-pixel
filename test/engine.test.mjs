@@ -2,11 +2,10 @@
 import { evaluateHand, handLevelValues, HANDS, HAND_BY_ID } from '../src/engine/hands.js';
 import { makeCard, SUITS } from '../src/engine/cards.js';
 import { Run } from '../src/engine/run.js';
-import { jokerTarget } from '../src/engine/jokers.js';
+import { jokerTarget, jokerValue, JOKERS } from '../src/engine/jokers.js';
 import { anteBase, blindScore, BOSS_BLINDS } from '../src/engine/blinds.js';
 import { createShop, buyCard, sellCard, computeSellValue, computeBuyCost } from '../src/engine/shop.js';
 import { roundHalfDown } from '../src/engine/value.js';
-import { JOKERS } from '../src/engine/jokers.js';
 import { readFileSync } from 'node:fs';
 import { JOKER_DESCRIPTIONS } from '../src/data/descriptions.js';
 
@@ -966,14 +965,14 @@ check('prices round half down', [roundHalfDown(8.5), roundHalfDown(8.6), roundHa
     return c;
   };
 
-  run.handsPlayed = 5;
-  run.discardsUsed = 0;
+  green.hands = 5;
+  green.discards = 0;
   check('the green joker counts the hands played', ctx().mult, 5);
 
-  run.discardsUsed = 2;
+  green.discards = 2;
   check('every discarded card counts against it', ctx().mult, 3);
 
-  run.discardsUsed = 9;
+  green.discards = 9;
   check('the green joker never goes below zero', ctx().mult, 0);
   check('the green joker explains itself', ctx().note.id, 'greenJoker');
   check('the green joker reports both numbers', ctx().note.args, [5, 9]);
@@ -985,8 +984,7 @@ check('prices round half down', [roundHalfDown(8.5), roundHalfDown(8.6), roundHa
   run.selectBlind('small');
   const green = run.buildJoker('Green Joker');
   run.jokers.push(green);
-  run.handsPlayed = 1;
-  run.discardsUsed = 0;
+  green.hands = 1;
   const a = C(5, 'H');
   const b = C(7, 'D');
   run.hand.push(a, b);
@@ -994,6 +992,37 @@ check('prices round half down', [roundHalfDown(8.5), roundHalfDown(8.6), roundHa
   const c = { mult: 0 };
   JOKERS['Green Joker'].fn(run, c, green);
   check('discards the player did not choose count too', c.mult, 0);
+  check('the green joker counted the discarded cards', green.discards, 2);
+}
+
+// The growing jokers keep their own number, so one picked up half way through
+// a run starts from zero instead of counting the whole run.
+{
+  const run = new Run({ seed: 124 });
+  run.selectBlind('small');
+  const ice = run.createJoker('Ice Cream');
+  const green = run.createJoker('Green Joker');
+  const pop = run.createJoker('Popcorn');
+
+  check('the ice cream starts at 100 chips', jokerValue(run, ice), { kind: 'chips', value: 100 });
+  check('the green joker starts at 0 mult', jokerValue(run, green), { kind: 'mult', value: 0 });
+  check('the popcorn starts at 20 mult', jokerValue(run, pop), { kind: 'mult', value: 20 });
+
+  // A hand played: the ice cream loses 5 chips, the green joker gains a mult.
+  run.hand = [C(5, 'H'), C(7, 'D'), C(9, 'C'), C(11, 'S'), C(13, 'H')];
+  run.selectCards(run.hand);
+  run.playHand();
+  check('the ice cream loses 5 chips a hand', jokerValue(run, ice), { kind: 'chips', value: 95 });
+  check('the green joker gains a mult a hand', jokerValue(run, green), { kind: 'mult', value: 1 });
+
+  // The popcorn only shrinks at the end of a round.
+  run.runEndOfRoundJokers();
+  check('the popcorn loses 4 mult a round', jokerValue(run, pop), { kind: 'mult', value: 16 });
+
+  // A joker picked up late starts from scratch.
+  const late = run.buildJoker('Ice Cream');
+  run.jokers.push(late);
+  check('a late ice cream starts at 100 chips', jokerValue(run, late), { kind: 'chips', value: 100 });
 }
 
 console.log(`\n${pass} passed, ${fail} failed`);

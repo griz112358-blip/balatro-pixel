@@ -501,8 +501,9 @@ const green = await page.evaluate(() => {
   r.selectBlind('small');
   g.startBlind();
   r.createJoker('Green Joker');
-  r.handsPlayed = 6;
-  r.discardsUsed = 2;
+  const green = r.jokers.find((j) => j.name === 'Green Joker');
+  green.hands = 6;
+  green.discards = 2;
   g.selection = r.hand.slice(0, 5);
   r.selectCards(g.selection);
   g.doPlay();
@@ -512,6 +513,20 @@ const green = await page.evaluate(() => {
 check('the green joker counts the hands against the discards', green.mult, 4);
 check('the green joker explains its number',
   green.note, { id: 'greenJoker', args: [6, 2] });
+
+// A joker that grows shows what it is worth right now.
+const grown = await page.evaluate(() => {
+  const g = window.game;
+  const r = g.run;
+  const ice = r.createJoker('Ice Cream');
+  ice.chips = 75;
+  g.showJokerDetail(ice);
+  const lines = g.detail.lines;
+  g.detail = null;
+  return lines;
+});
+check('the detail overlay shows what the joker is worth',
+  grown.some((l) => l.includes('75')), true);
 await page.evaluate(() => { window.game.scoreBreakdown = null; });
 
 // --- localisation --------------------------------------------------------

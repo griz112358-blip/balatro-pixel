@@ -130,6 +130,19 @@ function check(name, actual, expected = true) {
     /noteLabel\(step\.note\)/.test(mainSrc), true);
 }
 
+/**
+ * The jokers that grow have to show what they are worth right now: the card
+ * itself, the tooltip and the detail overlay.
+ */
+{
+  check('the card shows the value of a joker',
+    /formatJokerValue\(value\)/.test(pixelSrc), true);
+  check('the tooltip shows the value of a joker',
+    /ui\.jokerValue/.test(mainSrc), true);
+  check('the detail overlay shows the value of a joker',
+    /jokerValue\(this\.run, joker\)/.test(mainSrc), true);
+}
+
 for (const f of failures) console.log(`FAIL ${f}`);
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

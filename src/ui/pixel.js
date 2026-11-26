@@ -520,14 +520,34 @@ export function displayName(card) {
 }
 
 /**
+ * The number a joker has grown to: "+12", "85" or "X1.5".
+ *
+ * Chips are blue, mult is pink and an x mult is orange, the same way the
+ * score breakdown colours them.
+ */
+export function formatJokerValue(value) {
+  if (!value) return '';
+  if (value.kind === 'xmult') return `X${Math.round(value.value * 100) / 100}`;
+  if (value.kind === 'chips') return String(Math.round(value.value));
+  return `+${Math.round(value.value)}`;
+}
+
+/**
  * The picture on a joker card.
  *
  * Most jokers get a jester hat, but the ones that aim at a target show that
  * target instead: the poker hand, the rank or the suit they want this round.
  * The target changes at the end of every round, so it has to be on the card.
+ * A joker that grows shows what it is worth now instead of the hat.
  */
-function drawJokerIcon(ctx, card, x, y, s, color) {
+function drawJokerIcon(ctx, card, x, y, s, color, value) {
   const target = jokerTarget(card);
+  if (!target && value) {
+    const ink = value.kind === 'chips' ? PALETTE.lightBlue
+      : value.kind === 'xmult' ? PALETTE.orange : PALETTE.pink;
+    text(ctx, formatJokerValue(value), x + 15 * s, y + 9 * s, ink, 8 * s, 'center', false);
+    return;
+  }
   if (!target) {
     // a jester hat: a cone with a bell on either side
     ctx.fillStyle = color;
@@ -586,7 +606,7 @@ export function drawJokerCard(ctx, card, x, y, opts = {}) {
   // icon area
   const iconColor = isJoker ? PALETTE.pink : accent;
   if (isJoker) {
-    drawJokerIcon(ctx, card, x, y + oy, s, iconColor);
+    drawJokerIcon(ctx, card, x, y + oy, s, iconColor, opts.value);
   } else if (card.type === 'Tarot') {
     rect(ctx, x + 9 * s, y + oy + 7 * s, 12 * s, 15 * s, '#4a3570');
     frame(ctx, x + 9 * s, y + oy + 7 * s, 12 * s, 15 * s, PALETTE.purple, 1 * s);

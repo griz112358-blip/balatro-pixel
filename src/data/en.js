@@ -140,6 +140,7 @@ export const EN = {
   'ui.hudDeck': 'DECK %d  DISC %d  DISCARDS %d/%d',
   'ui.hudScore': 'SCORE %s',
   'ui.blindResult': 'BLIND SCORE %s / NEEDED %s',
+  'ui.jokerValue': 'Current value: %s',
   'ui.hudHand': 'HAND %s',
   'ui.hudLevel': 'LV %d',
   'ui.hudReward': 'REWARD $%d',

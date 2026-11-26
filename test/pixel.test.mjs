@@ -6,7 +6,9 @@
 //
 //   node test/pixel.test.mjs
 
-import { hasCJK, wrapName, wrapText, measure, fitText, chunk, enhLabel, W, H } from '../src/ui/pixel.js';
+import {
+  hasCJK, wrapName, wrapText, measure, fitText, chunk, enhLabel, formatJokerValue, W, H,
+} from '../src/ui/pixel.js';
 import { setLang } from '../src/ui/i18n.js';
 import { SUIT_SHAPES, suitShape, suitSvg, pathData, drawSuit } from '../src/ui/suits.js';
 
@@ -135,6 +137,23 @@ setLang('zh');
   check('the club is filled for every part',
     c.calls.filter((x) => x === 'fill').length, 4);
   check('the fill colour is used', c.fillStyle, '#fff');
+}
+
+// ---------------------------------------------------------------------------
+// The value on a joker card
+// ---------------------------------------------------------------------------
+
+/**
+ * The jokers that grow show what they are worth right now. Chips are blue,
+ * mult is pink and an x mult is orange, the same way the breakdown colours
+ * them, so the number alone has to be readable.
+ */
+{
+  check('a mult value reads +12', formatJokerValue({ kind: 'mult', value: 12 }), '+12');
+  check('a chip value reads 85', formatJokerValue({ kind: 'chips', value: 85 }), '85');
+  check('an x mult value reads X1.5', formatJokerValue({ kind: 'xmult', value: 1.5 }), 'X1.5');
+  check('an x mult keeps its decimals', formatJokerValue({ kind: 'xmult', value: 2.25 }), 'X2.25');
+  check('a joker with no value shows nothing', formatJokerValue(null), '');
 }
 
 for (const f of failures) console.log(`FAIL ${f}`);

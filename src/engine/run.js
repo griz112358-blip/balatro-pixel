@@ -103,7 +103,6 @@ export class Run {
     this.bossRerollsThisAnte = 0;
     this.lastHandChips = 0;
     this.madnessMult = 1;
-    this.rideTheBus = 0;
     this.seltzerHands = 0;
     this.deckSizeMod = 0;
     this.startingDeckSize = 52;
@@ -275,6 +274,12 @@ export class Run {
       }
     }
     this.discardsUsed += cards.length;
+
+    // The Green Joker loses one mult for every card that gets discarded.
+    for (const j of this.jokers) {
+      if (j.debuffed) continue;
+      if (j.name === 'Green Joker') j.discards = (j.discards || 0) + cards.length;
+    }
 
     // Yorick gains X1 every 23 discarded cards.
     for (const j of this.jokers) {
@@ -1136,9 +1141,17 @@ export class Run {
     // Glass cards may break after scoring
     this.breakGlassCards(played, res.scoredCards);
 
-    // Ride the Bus: consecutive hands without a scoring face card
+    // Ride the Bus: consecutive hands without a scoring face card.
+    // The Ice Cream loses 5 chips with every hand played, and the Green
+    // Joker gains a mult with every hand played. Each joker keeps its own
+    // number, so a joker picked up half way through a run starts from zero.
     const scoredFace = res.scoredCards.some((c) => isFace(effectiveRank(c)) || this.pareidolia);
-    if (scoredFace) this.rideTheBus = 0; else this.rideTheBus += 1;
+    for (const j of this.jokers) {
+      if (j.debuffed) continue;
+      if (j.name === 'Ride the Bus') j.mult = scoredFace ? 0 : (j.mult || 0) + 1;
+      if (j.name === 'Ice Cream') j.chips = Math.max(0, (j.chips ?? 100) - 5);
+      if (j.name === 'Green Joker') j.hands = (j.hands || 0) + 1;
+    }
 
     // Draw back to hand size
     this.drawCards(Math.max(0, this.handSize - this.hand.length));
@@ -1334,6 +1347,8 @@ export class Run {
           if (this.discardsLeft === this.discardsAtRoundStart) this.money += 2 * this.discardsAtRoundStart;
           break;
         case 'Egg': j.sellBonus = (j.sellBonus || 0) + 3; break;
+        // Popcorn loses 4 mult with every round and never goes below 0.
+        case 'Popcorn': j.mult = Math.max(0, (j.mult ?? 20) - 4); break;
         case 'Gift Card':
           this.jokers.forEach((x) => { x.sellBonus = (x.sellBonus || 0) + 1; });
           this.consumables.forEach((x) => { x.sellBonus = (x.sellBonus || 0) + 1; });

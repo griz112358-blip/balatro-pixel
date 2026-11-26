@@ -534,6 +534,7 @@ export const ZH = {
   "ui.hudDeck": "牌堆 %d  弃牌堆 %d  弃牌 %d/%d",
   "ui.hudScore": "得分 %s",
   "ui.blindResult": "本关得分 %s / 需要 %s",
+  "ui.jokerValue": "当前值：%s",
   "ui.hudHand": "牌型 %s",
   "ui.languageChinese": "已切换到中文",
   "ui.languageEnglish": "已切换到英文",
