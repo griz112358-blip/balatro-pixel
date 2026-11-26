@@ -954,5 +954,47 @@ check('prices round half down', [roundHalfDown(8.5), roundHalfDown(8.6), roundHa
   check('the lost blind was not beaten', lost.blindBeaten(), false);
 }
 
+// The Green Joker counts the hands played against the discarded cards, and it
+// never goes below zero.
+{
+  const run = new Run({ seed: 122 });
+  const green = run.buildJoker('Green Joker');
+  run.jokers.push(green);
+  const ctx = () => {
+    const c = { mult: 0 };
+    JOKERS['Green Joker'].fn(run, c, green);
+    return c;
+  };
+
+  run.handsPlayed = 5;
+  run.discardsUsed = 0;
+  check('the green joker counts the hands played', ctx().mult, 5);
+
+  run.discardsUsed = 2;
+  check('every discarded card counts against it', ctx().mult, 3);
+
+  run.discardsUsed = 9;
+  check('the green joker never goes below zero', ctx().mult, 0);
+  check('the green joker explains itself', ctx().note.id, 'greenJoker');
+  check('the green joker reports both numbers', ctx().note.args, [5, 9]);
+}
+
+// Cards the game discards for the player count against the Green Joker too.
+{
+  const run = new Run({ seed: 123 });
+  run.selectBlind('small');
+  const green = run.buildJoker('Green Joker');
+  run.jokers.push(green);
+  run.handsPlayed = 1;
+  run.discardsUsed = 0;
+  const a = C(5, 'H');
+  const b = C(7, 'D');
+  run.hand.push(a, b);
+  run.discardCards([a, b]);
+  const c = { mult: 0 };
+  JOKERS['Green Joker'].fn(run, c, green);
+  check('discards the player did not choose count too', c.mult, 0);
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

@@ -1640,17 +1640,22 @@ function breakdownLabel(step) {
   if (step.kind === 'voucher') return cn() ? name(step.name, 'voucher') : step.name;
   if (step.kind === 'joker') {
     const base = cn() ? name(step.name, 'joker') : step.name.toUpperCase();
+    const bits = [];
     if (step.edition && step.edition !== 'base') {
-      const ed = cn() ? name(step.edition, 'edition') : step.edition.toUpperCase();
-      return `${base} (${ed})`;
+      bits.push(cn() ? name(step.edition, 'edition') : step.edition.toUpperCase());
     }
-    return base;
+    const note = noteLabel(step.note);
+    if (note) bits.push(note);
+    return bits.length ? `${base} (${bits.join(' ')})` : base;
   }
   return '';
 }
 
 /** The short label of a card modifier: enhancement, seal or edition. */
 function noteLabel(note) {
+  if (!note) return '';
+  // A note may carry numbers, e.g. the Green Joker's hands and discards.
+  if (typeof note === 'object') return tf(`note.${note.id}`, ...(note.args || []));
   return t(`note.${note}`);
 }
 
@@ -1658,6 +1663,16 @@ function noteLabel(note) {
 function fmtScore(n) {
   const r = Math.round(n * 10) / 10;
   return Number.isInteger(r) ? formatNumber(r) : r.toFixed(1);
+}
+
+/**
+ * A score change with its sign: +8 or -8.
+ *
+ * A joker can take away from the score, and "+-8" is not a number anyone
+ * can read.
+ */
+function fmtDelta(n) {
+  return `${n >= 0 ? '+' : '-'}${fmtScore(Math.abs(n))}`;
 }
 
 /** The rows of a breakdown that actually contribute something. */
@@ -1697,10 +1712,10 @@ function drawBreakdown(ctx, x, y, w, maxRows, br) {
   for (const s of rows) {
     text(ctx, breakdownLabel(s), x, ry, PALETTE.cream, size);
     if (s.chips) {
-      text(ctx, `+${fmtScore(s.chips)}`, colChips, ry, PALETTE.lightBlue, size, 'right');
+      text(ctx, fmtDelta(s.chips), colChips, ry, PALETTE.lightBlue, size, 'right');
     }
     if (s.mult) {
-      text(ctx, `+${fmtScore(s.mult)}`, colMult, ry, PALETTE.pink, size, 'right');
+      text(ctx, fmtDelta(s.mult), colMult, ry, PALETTE.pink, size, 'right');
     }
     if (s.factors && s.factors.length) {
       const f = s.factors.map((v) => `×${v}`).join(' ');

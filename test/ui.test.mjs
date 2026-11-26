@@ -109,6 +109,27 @@ function check(name, actual, expected = true) {
     /total:\s*formatNumber\(run\.score\)/.test(body), true);
 }
 
+/**
+ * A joker can take away from the score. The breakdown used to print the sign
+ * of its own, so a joker that gave -8 mult read as "+-8", which is not a
+ * number anyone can make sense of.
+ */
+{
+  check('the breakdown prints a signed change', /fmtDelta\(s\.mult\)/.test(mainSrc), true);
+  check('the breakdown prints a signed chip change', /fmtDelta\(s\.chips\)/.test(mainSrc), true);
+  check('the breakdown does not print a plus before a minus',
+    /`\+\$\{fmtScore\(/.test(mainSrc), false);
+}
+
+/**
+ * The Green Joker counts hands played against discarded cards, so its number
+ * only makes sense with both of them. The breakdown has to say which is which.
+ */
+{
+  check('the breakdown explains the green joker',
+    /noteLabel\(step\.note\)/.test(mainSrc), true);
+}
+
 for (const f of failures) console.log(`FAIL ${f}`);
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

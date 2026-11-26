@@ -277,6 +277,7 @@ export const EN = {
   'note.foil': 'Foil',
   'note.holographic': 'Holographic',
   'note.polychrome': 'Polychrome',
+  'note.greenJoker': 'hands %d - discards %d',
 
   // ------------------------------------------------------------- rules page
   'rules.title': 'Rules & Reference',

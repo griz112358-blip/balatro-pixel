@@ -219,7 +219,14 @@ export const JOKERS = {
   'Green Joker': {
     activation: 'independent',
     fn: (s, ctx) => {
-      ctx.mult += s.handsPlayed - s.discardsUsed;
+      // "+1 mult per hand played, -1 mult per card discarded". It starts at
+      // +0 and never goes below it, so discards can only hold it back, never
+      // subtract from the score. Both numbers are reported so the breakdown
+      // can say which of the two is which.
+      const hands = s.handsPlayed;
+      const discards = s.discardsUsed;
+      ctx.mult += Math.max(0, hands - discards);
+      ctx.note = { id: 'greenJoker', args: [hands, discards] };
     },
   },
   'Popcorn': {

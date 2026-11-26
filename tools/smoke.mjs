@@ -490,6 +490,30 @@ check('the lost blind did not reach its target',
   over.roundScore < over.needed, true);
 await shot('09b-game-over');
 
+// The Green Joker counts hands played against discarded cards, and its number
+// has to say which of the two it counts. It runs in a fresh run, so it does not
+// disturb the one that just ended.
+const green = await page.evaluate(() => {
+  const g = window.game;
+  g.seed = 11;
+  g.startRun();
+  const r = g.run;
+  r.selectBlind('small');
+  g.startBlind();
+  r.createJoker('Green Joker');
+  r.handsPlayed = 6;
+  r.discardsUsed = 2;
+  g.selection = r.hand.slice(0, 5);
+  r.selectCards(g.selection);
+  g.doPlay();
+  const step = (g.lastResult?.breakdown?.steps || []).find((s) => s.name === 'Green Joker');
+  return { mult: step ? step.mult : null, note: step ? step.note : null };
+});
+check('the green joker counts the hands against the discards', green.mult, 4);
+check('the green joker explains its number',
+  green.note, { id: 'greenJoker', args: [6, 2] });
+await page.evaluate(() => { window.game.scoreBreakdown = null; });
+
 // --- localisation --------------------------------------------------------
 // The interface switches between Chinese and English at runtime, and the
 // render surface scales the pixel buffer by a whole multiple.

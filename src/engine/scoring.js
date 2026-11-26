@@ -167,8 +167,13 @@ export function scoreHand(state, playedCards) {
       ctx.joker = joker;
       const cBefore = snap(ctx);
       const mulStart = ctx.mulSteps.length;
+      // A joker may explain its own number (the Green Joker counts hands and
+      // discards). The engine stays language neutral: it only names the note.
+      ctx.note = null;
       def.fn(state, ctx, joker);
-      finishStep(ctx, cBefore, mulStart, { kind: 'joker', name: joker.name });
+      const note = ctx.note;
+      ctx.note = null;
+      finishStep(ctx, cBefore, mulStart, { kind: 'joker', name: joker.name, note });
     }
   }
   // onOtherJokers (Baseball Card) — after independents

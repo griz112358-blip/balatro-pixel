@@ -19,6 +19,7 @@ export const JOKER_DESCRIPTIONS = {
   'Erosion': '+4 mult for each card below the deck\'s starting size in your full deck',
   'Gluttonous Joker': 'Played cards with Clubs give +3 mult when scored',
   'Greedy Joker': 'Played cards with Diamonds give +3 mult when scored',
+  'Green Joker': '+1 mult per hand played, -1 mult per card discarded (never below 0)',
   'Hiker': 'Every played card permanently gains +5 chips when scored',
   'Jolly Joker': '+8 mult if played hand contains a Pair',
   'Lusty Joker': 'Played cards with Hearts give +3 mult when scored',
